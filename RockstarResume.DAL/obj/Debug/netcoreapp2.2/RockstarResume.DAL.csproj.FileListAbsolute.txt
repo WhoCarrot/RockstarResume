@@ -1,0 +1,14 @@
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.AssemblyInfoInputs.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.AssemblyInfo.cs
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.csprojAssemblyReference.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.DAL.deps.json
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.DAL.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.Model.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.Model.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.csproj.CopyComplete
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.DAL.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\obj\Debug\netcoreapp2.2\RockstarResume.DAL.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.DAL.runtimeconfig.json
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.DAL\bin\Debug\netcoreapp2.2\RockstarResume.DAL.runtimeconfig.dev.json

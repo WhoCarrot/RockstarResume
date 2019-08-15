@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RockstarResume.DAL\RockstarResume.DAL.csproj" />
+    <ProjectReference Include="..\RockstarResume.Model\RockstarResume.Model.csproj" />
+  </ItemGroup>
+
+</Project>

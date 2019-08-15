@@ -1,0 +1,14 @@
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.csprojAssemblyReference.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.csproj.CoreCompileInputs.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.AssemblyInfoInputs.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.AssemblyInfo.cs
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.Services.deps.json
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.Services.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.Services.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.DAL.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.Model.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.DAL.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\bin\Debug\netcoreapp2.2\RockstarResume.Model.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.csproj.CopyComplete
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Services\obj\Debug\netcoreapp2.2\RockstarResume.Services.pdb

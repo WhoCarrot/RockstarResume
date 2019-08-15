@@ -1,0 +1,9 @@
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\bin\Debug\netcoreapp2.2\RockstarResume.Model.deps.json
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\bin\Debug\netcoreapp2.2\RockstarResume.Model.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\bin\Debug\netcoreapp2.2\RockstarResume.Model.pdb
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\obj\Debug\netcoreapp2.2\RockstarResume.Model.csprojAssemblyReference.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\obj\Debug\netcoreapp2.2\RockstarResume.Model.csproj.CoreCompileInputs.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\obj\Debug\netcoreapp2.2\RockstarResume.Model.AssemblyInfoInputs.cache
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\obj\Debug\netcoreapp2.2\RockstarResume.Model.AssemblyInfo.cs
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\obj\Debug\netcoreapp2.2\RockstarResume.Model.dll
+C:\Users\Maurits\Documents\Development\Projects\Rockstars\RockstarResume\RockstarResume.Model\obj\Debug\netcoreapp2.2\RockstarResume.Model.pdb
