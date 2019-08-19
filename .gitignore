@@ -361,3 +361,10 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/vuejs,visualstudio
+RockstarResume.DAL/obj/
+
+RockstarResume.Model/obj/
+
+RockstarResume/.idea/
+
+RockstarResume.Services/obj/
