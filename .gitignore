@@ -368,3 +368,5 @@ RockstarResume.Model/obj/
 RockstarResume/.idea/
 
 RockstarResume.Services/obj/
+
+package-lock.json

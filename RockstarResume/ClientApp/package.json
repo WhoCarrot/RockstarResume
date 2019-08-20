@@ -10,6 +10,9 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
     "bootstrap-vue": "^2.0.0-rc.19",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
@@ -46,6 +49,7 @@
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
     "vue-cli-plugin-bootstrap-vue": "^0.4.0",
+    "vue-cli-plugin-fontawesome": "^0.2.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -62,6 +66,10 @@
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     }
+  },
+  "prettier": {
+    "prettier.disableLanguages": [],
+    "prettier.jsxBracketSameLine": true
   },
   "postcss": {
     "plugins": {
@@ -80,8 +88,5 @@
       "vue-cli-service lint",
       "git add"
     ]
-  },
-  "prettier": {
-    "prettier.disableLanguages": []
   }
 }
