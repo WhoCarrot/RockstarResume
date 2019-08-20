@@ -15,8 +15,9 @@ export default new Router({
       component: Overview
     },
     {
-      path: "/Resume",
+      path: "/Resume/:Id",
       name: "Resume",
+      props: true,
       // route level code-splitting
       // this generates a separate chunk (Resume.[hash].js) for this route
       // which is lazy-loaded when the route is visited.

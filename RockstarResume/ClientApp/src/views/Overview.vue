@@ -1,13 +1,12 @@
 <template>
   <b-container fluid class="overview">
     <b-list-group>
-      <b-list-group-item
-        v-for="(resume, index) in getResumeList"
-        :key="index"
-        href="#some-link"
-        active
-      >{{resume.Id}}</b-list-group-item>
+      <b-list-group-item v-for="(resume, key) in getResumeList" :key="key">
+        <b-link :to="{ name: 'Resume', params: { Id: resume.Id }}">{{ resume.Id}}</b-link>
+        <!-- <router-link :to="{ name: 'Resume', params: { Id: resume.Id }}">{{ resume.Id}}</router-link> -->
+      </b-list-group-item>
     </b-list-group>
+
     <div class="col text-center">
       <b-button
         variant="outline-primary"
@@ -36,11 +35,12 @@ export default {
     ...mapGetters("resume", ["getResumeList"])
   },
   methods: {
-    ...mapActions("resume", ["requestResumeList","createResume"])
+    ...mapActions("resume", ["requestResumeList", "createResume"])
   },
-  created () {
-    this.$store.dispatch('resume/requestResumeList')
-  }};
+  created() {
+    this.$store.dispatch("resume/requestResumeList");
+  }
+};
 </script>
 
 <style scoped>

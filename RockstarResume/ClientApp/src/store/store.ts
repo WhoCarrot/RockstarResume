@@ -1,16 +1,26 @@
 import Vue from "vue";
-import Vuex from "vuex";
-import pathify from "vuex-pathify";
 
-import resume from "@/store/modules/resume";
+// https://vuex.vuejs.org/
+import Vuex from "vuex";
 Vue.use(Vuex);
+
+// Vuex ORM
+// https://github.com/vuex-orm/vuex-orm
+import { VuexORM, database } from "./vuexORM"
+
+// https://github.com/davestewart/vuex-pathify
+// optional configuration
+import pathify from './pathify'
+pathify.debug()
+
+import resumeModule from "@/store/modules/resumeModule";
 
 const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
   modules: {
-    resume,
+    resumeModule,
   },
   strict: debug,
-  plugins: [pathify.plugin]
+  plugins: [VuexORM.install(database), pathify.plugin]
 });

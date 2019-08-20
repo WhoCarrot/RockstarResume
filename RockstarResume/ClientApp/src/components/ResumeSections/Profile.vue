@@ -5,17 +5,12 @@
         <label for="type-text">First name</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input
-          id="input-first-name"
-          v-model="resume.firstName"
-          v-on:input="updateResume()"
-          type="text"
-          required
-        ></b-form-input>
+        <b-form-input id="input-first-name" v-model="firstName" type="text" required></b-form-input>
+        <p>{{Id}}</p>
       </b-col>
     </b-row>
 
-    <b-row class="my-1">
+    <!-- <b-row class="my-1">
       <b-col sm="3">
         <label for="type-text">Last name</label>
       </b-col>
@@ -80,7 +75,7 @@
                 name="flavour-2a"
                 stacked
               ></b-form-checkbox-group>
-            </b-card-body> 
+            </b-card-body>
           </b-collapse>
         </b-card>
       </b-col>
@@ -119,32 +114,31 @@
         class="mx-auto my-1"
         v-on:click="addLanguageRow()"
       >Add language</b-button>
-    </div>
-
-    <p>{{resume}}</p>
+    </div>-->
   </b-container>
 </template>
 
 <script>
 import languages_en from "../../assets/js/data/languages.en";
+import { get, sync, dispatch } from "vuex-pathify";
 
 export default {
   name: "resumeProfile",
   data() {
     return {
-      resume: {
-        firstName: "",
-        lastName: "",
-        region: "",
+      // resume: {
+      //   firstName: "",
+      //   lastName: "",
+      //   region: "",
 
-        driversLicense: [],
-        languages: [
-          {
-            language: "",
-            proficiency: 0
-          }
-        ]
-      },
+      //   driversLicense: [],
+      //   languages: [
+      //     {
+      //       language: "",
+      //       proficiency: 0
+      //     }
+      //   ]
+      // },
 
       options: {
         driversLicense: [
@@ -203,9 +197,33 @@ export default {
       }
     };
   },
-  props: {},
+  props: ["Id"],
 
   computed: {
+    firstName: {
+      get() {
+        return get("resume/getResume", this.Id).firstName;
+      },
+      set(value) {
+        this.$store.dispatch("resume/setResumeProp", {
+          Id: this.Id,
+          prop: "FirstName",
+          value
+        });
+      }
+    },
+    // firstName: {
+    // // getter
+    // get: function () {
+    //   return this.firstName + ' ' + this.lastName
+    // },
+    // // setter
+    // set: function (newValue) {
+    //   var names = newValue.split(' ')
+    //   this.firstName = names[0]
+    //   this.lastName = names[names.length - 1]
+    // },
+
     driversLicenseTitle: function() {
       var $title = "";
       let $count = this.resume.driversLicense.length;
@@ -233,8 +251,7 @@ export default {
   },
   methods: {
     updateResume: function() {
-      console.log("update");
-      this.$emit("updateResume", this.resume);
+      // this.$emit("updateResume", this.resume);
     },
 
     addLanguageRow: function() {
@@ -248,6 +265,9 @@ export default {
         this.resume.languages.splice(index, 1);
       }
     }
+  },
+  created() {
+    //this.updateResume();
   }
 };
 </script>
