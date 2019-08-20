@@ -31,6 +31,7 @@
 
 <script>
 import Profile from "@/components/ResumeSections/Profile.vue";
+import Resume from "@/assets/ts/class/resume";
 import { get, sync } from "vuex-pathify";
 import { mapGetters, mapActions } from "vuex";
 
@@ -57,13 +58,8 @@ export default {
     };
   },
   props: ["Id"],
-  computed: { ...mapGetters("resume", ["getResume"]) },
+  computed: {  },
   methods: {
-    updateResumeinDB: function() {
-      store.dispatch("updateResume", {
-        resume: this.resume
-      });
-    },
     ...mapActions("resume", ["requestResumeList", "createResume"])
   },
   created() {

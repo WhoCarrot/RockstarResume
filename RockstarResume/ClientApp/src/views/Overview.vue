@@ -2,7 +2,7 @@
   <b-container fluid class="overview">
     <b-list-group>
       <b-list-group-item v-for="(resume, key) in getResumeList" :key="key">
-        <b-link :to="{ name: 'Resume', params: { Id: resume.Id }}">{{ resume.Id}}</b-link>
+        <b-link :to="{ name: 'Resume', params: { Id: resume.ID }}">{{ resume.ID }}</b-link>
         <!-- <router-link :to="{ name: 'Resume', params: { Id: resume.Id }}">{{ resume.Id}}</router-link> -->
       </b-list-group-item>
     </b-list-group>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Resume from "@/assets/js/class/resume";
+import Resume from "@/assets/ts/class/resume";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -28,14 +28,12 @@ export default {
     return {};
   },
   computed: {
-    // getResumeList: function() {
-    //   return this.$store.getters.getResumeList;
-    // }
+    getResumeList () {
+      return Resume.all()
+    }
 
-    ...mapGetters("resume", ["getResumeList"])
   },
   methods: {
-    ...mapActions("resume", ["requestResumeList", "createResume"])
   },
   created() {
     this.$store.dispatch("resume/requestResumeList");

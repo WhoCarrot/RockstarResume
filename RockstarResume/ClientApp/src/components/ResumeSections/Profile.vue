@@ -6,22 +6,15 @@
       </b-col>
       <b-col sm="9">
         <b-form-input id="input-first-name" v-model="firstName" type="text" required></b-form-input>
-        <p>{{Id}}</p>
       </b-col>
     </b-row>
 
-    <!-- <b-row class="my-1">
+    <b-row class="my-1">
       <b-col sm="3">
         <label for="type-text">Last name</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input
-          id="input-last-name"
-          v-model="resume.lastName"
-          v-on:input="updateResume()"
-          type="text"
-          required
-        ></b-form-input>
+        <b-form-input id="input-last-name" v-model="lastName" type="text" required></b-form-input>
       </b-col>
     </b-row>
 
@@ -30,13 +23,7 @@
         <label for="type-text">Region</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input
-          id="input-region"
-          v-model="resume.region"
-          v-on:input="updateResume()"
-          type="text"
-          required
-        ></b-form-input>
+        <b-form-input id="input-region" v-model="region" type="text" required></b-form-input>
       </b-col>
     </b-row>
 
@@ -45,7 +32,7 @@
         <label for="type-text">Nationality</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input id="input-nationality" v-on:input="updateResume()" type="text" required></b-form-input>
+        <b-form-input id="input-nationality" v-model="nationality" type="text" required></b-form-input>
       </b-col>
     </b-row>
 
@@ -69,8 +56,7 @@
           <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-form-checkbox-group
-                v-model="resume.driversLicense"
-                v-on:input="updateResume()"
+                v-model="driversLicense"
                 :options="options.driversLicense"
                 name="flavour-2a"
                 stacked
@@ -82,7 +68,8 @@
     </b-row>
 
     <hr />
-    <label for="type-text">Languages</label>
+    <p>{{driversLicense}}</p>
+    <!-- <label for="type-text">Languages</label>
 
     <b-row v-for="(row, index) in resume.languages" :key="index" class="my-1">
       <b-col sm="5">
@@ -115,10 +102,18 @@
         v-on:click="addLanguageRow()"
       >Add language</b-button>
     </div>-->
+
+    <!-- <b-button
+      variant="outline-primary"
+      class="mx-auto my-1"
+      v-on:click="saveResume()"
+    >Save Resume</b-button>-->
   </b-container>
 </template>
 
 <script>
+import Resume from "@/assets/ts/class/resume";
+
 import languages_en from "../../assets/js/data/languages.en";
 import { get, sync, dispatch } from "vuex-pathify";
 
@@ -126,20 +121,6 @@ export default {
   name: "resumeProfile",
   data() {
     return {
-      // resume: {
-      //   firstName: "",
-      //   lastName: "",
-      //   region: "",
-
-      //   driversLicense: [],
-      //   languages: [
-      //     {
-      //       language: "",
-      //       proficiency: 0
-      //     }
-      //   ]
-      // },
-
       options: {
         driversLicense: [
           { value: "N.V.T", text: "Geen rijbewijzen in bezit" },
@@ -202,35 +183,71 @@ export default {
   computed: {
     firstName: {
       get() {
-        return get("resume/getResume", this.Id).firstName;
+        return Resume.find(this.Id).firstName;
       },
       set(value) {
-        this.$store.dispatch("resume/setResumeProp", {
-          Id: this.Id,
-          prop: "FirstName",
-          value
+        Resume.update({
+          where: this.Id,
+          data: { firstName: value }
         });
       }
     },
-    // firstName: {
-    // // getter
-    // get: function () {
-    //   return this.firstName + ' ' + this.lastName
-    // },
-    // // setter
-    // set: function (newValue) {
-    //   var names = newValue.split(' ')
-    //   this.firstName = names[0]
-    //   this.lastName = names[names.length - 1]
-    // },
+    lastName: {
+      get() {
+        return Resume.find(this.Id).lastName;
+      },
+      set(value) {
+        Resume.update({
+          where: this.Id,
+          data: { lastName: value }
+        });
+      }
+    },
+    region: {
+      get() {
+        return Resume.find(this.Id).region;
+      },
+      set(value) {
+        Resume.update({
+          where: this.Id,
+          data: { region: value }
+        });
+      }
+    },
+    nationality: {
+      get() {
+        return Resume.find(this.Id).nationality;
+      },
+      set(value) {
+        Resume.update({
+          where: this.Id,
+          data: { nationality: value }
+        });
+      }
+    },
+    driversLicense: {
+      get() {
+        return (
+          Resume //.query()
+            //.with("driversLicenses")
+            .find(this.Id).driversLicenses
+        );
+      },
+      set(value) {
+        Resume.update({
+          where: this.Id,
+          data(resume) {
+            resume.driversLicenses = value;
+          }
+        });
+      }
+    },
 
     driversLicenseTitle: function() {
       var $title = "";
-      let $count = this.resume.driversLicense.length;
+      let $count = this.driversLicense.length;
       if ($count > 0) {
-        $title = this.resume.driversLicense
-          .join(", ")
-          .replace(/,(?!.*,)/gim, " &");
+        $title = this.driversLicense.join(", ").replace(/,(?!.*,)/gim, " &");
       } else {
         $title = "Please select your driver licenses";
       }
@@ -253,7 +270,7 @@ export default {
     updateResume: function() {
       // this.$emit("updateResume", this.resume);
     },
-
+    saveResume: function() {},
     addLanguageRow: function() {
       this.resume.languages.push({
         lang: "",

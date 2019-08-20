@@ -13,13 +13,13 @@ import { VuexORM, database } from "./vuexORM"
 import pathify from './pathify'
 pathify.debug()
 
-import resumeModule from "@/store/modules/resumeModule";
+import resume from "@/store/modules/resumeModule";
 
 const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
   modules: {
-    resumeModule,
+    resume,
   },
   strict: debug,
   plugins: [VuexORM.install(database), pathify.plugin]

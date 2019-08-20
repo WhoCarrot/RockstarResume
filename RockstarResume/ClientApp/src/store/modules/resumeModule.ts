@@ -2,7 +2,7 @@ import store from "../store";
 // pathify
 import { make } from "vuex-pathify";
 
-import { Resume } from "@/assets/ts/class/resume";
+import Resume from "@/assets/ts/class/resume";
 
 // initial state
 const state = {
@@ -13,15 +13,6 @@ const state = {
 const getters = {
   resumeList: (state: any) =>
     state.resumeList.map((data: Resume) => new Resume(data)),
-
-  getResumeList: (state: any) => {
-    return state.resumeList;
-  },
-  getResume: (state: any) => (id: Number) => {
-    return state.getters.getResumeList.find(
-      (resume: Resume) => resume.Id === id
-    );
-  }
 };
 
 // actions
@@ -32,20 +23,9 @@ const actions = {
     // TODO Call to API to return the stored Resumes
 
     Resume.insert({
-      data: [{ Id: 252 }, { Id: 3462 }]
+      data: [{ id: 252 }, { id: 3462 }]
     })
   },
-  createResume(state: any, commit: any) {
-    state.commit("addResume", new Resume());
-  },
-  updateResume(state: any, commit: any) {
-    state.commit("addResume", new Resume());
-  },
-  setResumeProp(state: any, payload: any) {
-    var g = state.resumeList;
-    console.log(payload);
-    state.commit("setResumeProp", payload);
-  }
 };
 
 // mutations
@@ -58,14 +38,6 @@ const mutations = {
     state.resumeList.push(newResume);
   },
 
-  setResumeProp(state: any, payload: any) {
-
-    if (!state.resumeList || state.resumeList.length === 0) {
-      actions.
-    }
-    state.resumeList.find((x: Resume) => x.Id === payload.Id)[payload.prop] =
-      payload.value;
-  }
 };
 
 export default {

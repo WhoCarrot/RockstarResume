@@ -1,26 +1,25 @@
 import { Model } from "@vuex-orm/core";
+import DriversLicense from "./driversLicenses";
 
 "use strict";
 
 export default class Resume extends Model {
   static entity = "resumes";
-  public Id: number = 0;
-  public FirstName: String = "";
 
-  // List of all fields (schema) of the post model. `this.attr` is used
-  // for the generic field type. The argument is the default value.
   static fields() {
     return {
       id: this.attr(null),
       firstName: this.attr(""),
       lastName: this.attr(""),
-
-      email: this.attr("")
+      region: this.attr(""),
+      nationality: this.attr(""),
+      driversLicenses: this.attr([]),
+      // relationships
+      //driversLicenses: this.hasMany(DriversLicense, "resume_id")
     };
   }
-  // constructor(init?: Partial<Resume>) {
-  //   Object.assign(this, init);
-  // }
-}
 
-export { Resume };
+  get ID(): Number {
+    return this.id;
+  }
+}
