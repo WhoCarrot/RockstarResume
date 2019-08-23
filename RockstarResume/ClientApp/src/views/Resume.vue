@@ -58,11 +58,12 @@ export default {
     };
   },
   props: ["Id"],
-  computed: {  },
+  computed: {},
   methods: {
     ...mapActions("resume", ["requestResumeList", "createResume"])
   },
-  created() {
+
+  beforeMount() {
     this.$store.dispatch("resume/requestResumeList");
   }
 };

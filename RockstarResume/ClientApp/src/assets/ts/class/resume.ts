@@ -1,5 +1,7 @@
 import { Model } from "@vuex-orm/core";
 import DriversLicense from "./driversLicenses";
+import Education from "./education";
+import Language from "./language";
 
 "use strict";
 
@@ -14,12 +16,16 @@ export default class Resume extends Model {
       region: this.attr(""),
       nationality: this.attr(""),
       driversLicenses: this.attr([]),
-      // relationships
-      //driversLicenses: this.hasMany(DriversLicense, "resume_id")
-    };
-  }
 
-  get ID(): Number {
-    return this.id;
+      // relationships
+      languageList: this.attr([{
+        resume_id: this.id,
+        language_name: "",
+        language_level: 0
+      }]),
+      languages: this.hasMany(Language, "resume_id"),
+      educationList: this.attr(null),
+      educations: this.hasMany(Education, "educationList")
+    };
   }
 }

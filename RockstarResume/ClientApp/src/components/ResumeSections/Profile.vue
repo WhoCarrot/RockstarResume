@@ -69,25 +69,28 @@
 
     <hr />
     <p>{{driversLicense}}</p>
-    <!-- <label for="type-text">Languages</label>
 
-    <b-row v-for="(row, index) in resume.languages" :key="index" class="my-1">
+    <!-- Languages -->
+
+    <label for="type-text">Languages</label>
+
+    <b-row v-for="(language, index) in languageList" :key="index" class="my-1">
       <b-col sm="5">
-        <b-form-input list="my-list-id" v-on:input="updateResume()" v-model="row.language"></b-form-input>
+        <b-form-input
+          list="my-list-id"
+          :value="language.language_name"
+          @input="e => { updateLanguageRow(language, e) }"
+        ></b-form-input>
 
         <datalist id="my-list-id">
           <option
-            v-for="(language, index) in options.languageOptions"
+            v-for="(languageOption, index) in options.languageOptions"
             :key="index"
-          >{{ language.text }}</option>
+          >{{ languageOption.text }}</option>
         </datalist>
       </b-col>
       <b-col sm="6">
-        <b-form-select
-          v-model="row.proficiency"
-          v-on:input="updateResume()"
-          :options="options.languageLevels"
-        ></b-form-select>
+        <b-form-select v-model="language.language_level" :options="options.languageLevels"></b-form-select>
       </b-col>
       <b-col class="text-left">
         <b-button variant="link" v-on:click="removeLanguageRow(index)" style="padding: 2px 8px;">
@@ -101,8 +104,8 @@
         class="mx-auto my-1"
         v-on:click="addLanguageRow()"
       >Add language</b-button>
-    </div>-->
-
+    </div>
+    <pre>{{resumeData}}</pre>
     <!-- <b-button
       variant="outline-primary"
       class="mx-auto my-1"
@@ -113,6 +116,7 @@
 
 <script>
 import Resume from "@/assets/ts/class/resume";
+import Language from "@/assets/ts/class/language";
 
 import languages_en from "../../assets/js/data/languages.en";
 import { get, sync, dispatch } from "vuex-pathify";
@@ -181,6 +185,16 @@ export default {
   props: ["Id"],
 
   computed: {
+    resumeData: function() {
+      return Resume.query()
+        .whereId(this.Id)
+        .withAll()
+        .first();
+
+      // console.log(x);
+
+      // return x;
+    },
     firstName: {
       get() {
         return Resume.find(this.Id).firstName;
@@ -242,6 +256,37 @@ export default {
         });
       }
     },
+    languageList: function() {
+      return Language.query()
+        .where("resume_id", this.Id)
+        .get();
+      // .with("languages")
+      // .find(this.Id); //
+      // set(value) {
+      //   console.log(value);
+      //   Resume.update({
+      //     where: this.Id,
+      //     data(resume) {
+      //       resume.language_list = value;
+      //     }
+      //   });
+      // }
+    },
+    // educationList: {
+    //   get() {
+    //     return Resume.query()
+    //       .with("educations")
+    //       .find(this.Id);
+    //   },
+    //   set(value) {
+    //     Resume.update({
+    //       where: this.Id,
+    //       data(resume) {
+    //         resume.driversLicenses = value;
+    //       }
+    //     });
+    //   }
+    // },
 
     driversLicenseTitle: function() {
       var $title = "";
@@ -253,17 +298,6 @@ export default {
       }
 
       return $title;
-    },
-    getLanguageRows: function() {
-      if (this.resume.languages.length === 0) {
-        return [
-          {
-            lang: "",
-            proficiency: 0
-          }
-        ];
-      }
-      return this.resume.languages;
     }
   },
   methods: {
@@ -272,10 +306,24 @@ export default {
     },
     saveResume: function() {},
     addLanguageRow: function() {
-      this.resume.languages.push({
-        lang: "",
-        proficiency: 0
+      this.$store.dispatch("resume/addLanguage", {
+        resume_id: this.Id
       });
+    },
+    updateLanguageRow(row, e) {
+      console.log(e);
+
+      console.log(row);
+      Resume.insertOrUpdate({
+        data: {
+          id: this.Id,
+          languages: [{ id: row.id, resume_id: this.Id, language_name: e }]
+        }
+      });
+      // Language.update({
+      //   where: row.id,
+      //   data: { language_name: e }
+      // });
     },
     removeLanguageRow: function(index) {
       if (index > -1) {

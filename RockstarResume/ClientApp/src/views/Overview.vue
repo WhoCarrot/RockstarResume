@@ -2,7 +2,7 @@
   <b-container fluid class="overview">
     <b-list-group>
       <b-list-group-item v-for="(resume, key) in getResumeList" :key="key">
-        <b-link :to="{ name: 'Resume', params: { Id: resume.ID }}">{{ resume.ID }}</b-link>
+        <b-link :to="{ name: 'Resume', params: { Id: resume.id }}">{{ resume.id }}</b-link>
         <!-- <router-link :to="{ name: 'Resume', params: { Id: resume.Id }}">{{ resume.Id}}</router-link> -->
       </b-list-group-item>
     </b-list-group>
@@ -28,14 +28,16 @@ export default {
     return {};
   },
   computed: {
-    getResumeList () {
-      return Resume.all()
+    getResumeList() {
+      return Resume.all();
     }
-
   },
   methods: {
+    createResume() {
+      this.$store.dispatch("resume/addResume");
+    }
   },
-  created() {
+  beforeMount() {
     this.$store.dispatch("resume/requestResumeList");
   }
 };
