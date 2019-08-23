@@ -68,10 +68,7 @@
     </b-row>
 
     <hr />
-    <p>{{driversLicense}}</p>
-
     <!-- Languages -->
-
     <label for="type-text">Languages</label>
 
     <b-row v-for="(language, index) in languageList" :key="index" class="my-1">
@@ -105,7 +102,41 @@
         v-on:click="addLanguageRow()"
       >Add language</b-button>
     </div>
-    <pre>{{resumeData}}</pre>
+    <!-- Education -->
+    <label for="type-text">Languages</label>
+
+    <b-row v-for="(language, index) in languageList" :key="index" class="my-1">
+      <b-col sm="5">
+        <b-form-input
+          list="my-list-id"
+          :value="language.language_name"
+          @input="e => { updateLanguageRow(language, e) }"
+        ></b-form-input>
+
+        <datalist id="my-list-id">
+          <option
+            v-for="(languageOption, index) in options.languageOptions"
+            :key="index"
+          >{{ languageOption.text }}</option>
+        </datalist>
+      </b-col>
+      <b-col sm="6">
+        <b-form-select v-model="language.language_level" :options="options.languageLevels"></b-form-select>
+      </b-col>
+      <b-col class="text-left">
+        <b-button variant="link" v-on:click="removeLanguageRow(index)" style="padding: 2px 8px;">
+          <font-awesome-icon icon="trash" style="font-size: 28px" />
+        </b-button>
+      </b-col>
+    </b-row>
+    <div class="col text-center">
+      <b-button
+        variant="outline-primary"
+        class="mx-auto my-1"
+        v-on:click="addLanguageRow()"
+      >Add language</b-button>
+    </div>
+
     <!-- <b-button
       variant="outline-primary"
       class="mx-auto my-1"
@@ -186,14 +217,7 @@ export default {
 
   computed: {
     resumeData: function() {
-      return Resume.query()
-        .whereId(this.Id)
-        .withAll()
-        .first();
-
-      // console.log(x);
-
-      // return x;
+      return get("resume/resumeData", this.Id);
     },
     firstName: {
       get() {

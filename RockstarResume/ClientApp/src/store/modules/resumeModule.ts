@@ -6,14 +6,15 @@ import Resume from "@/assets/ts/class/resume";
 import Language from "@/assets/ts/class/language";
 
 // initial state
-const state = {
-  resumeList: []
-};
+const state = {};
 
 // getters
 const getters = {
-  resumeList: (state: any) =>
-    state.resumeList.map((data: Resume) => new Resume(data))
+  resumeData: (state: any) => (id: number) =>
+    Resume.query()
+      .whereId(id)
+      .withAll()
+      .first()
 };
 
 // actions
@@ -22,7 +23,7 @@ const actions = {
     //TODO temporary data population
     // TODO Call to API to return the stored Resumes
 
-    Resume.insert({
+    Resume.insertOrUpdate({
       data: [{ id: 252 }, { id: 3462 }]
     });
   },
@@ -38,8 +39,8 @@ const actions = {
     });
   },
   addResume(state: any, commit: any) {
-    commit('resume/addResume')
-  },
+    state.commit("addResume");
+  }
 };
 
 // mutations
@@ -49,10 +50,11 @@ const mutations = {
   },
 
   addResume(state: any) {
-    Resume.insert({ data: {} });
+    const id = Math.round(Math.random() * (10000 - 1) + 1);
+    Resume.insert({ data: { id} });
   },
 
-  addLanguage(state: any, resumeId: Number) {
+  addLanguage(state: any, resumeId: number) {
     Language.insert({
       data: {
         resume_id: resumeId,

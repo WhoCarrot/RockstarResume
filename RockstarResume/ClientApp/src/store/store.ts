@@ -26,15 +26,8 @@ export default new Vuex.Store({
   },
   strict: debug,
   plugins: [
-    createPersistedState({
-      storage: {
-        getItem: key => Cookies.get(key),
-        setItem: (key, value) =>
-          Cookies.set(key, value, { expires: 3, secure: true }),
-        removeItem: key => Cookies.remove(key)
-      }
-    }),
     VuexORM.install(database),
+    createPersistedState({ storage: window.sessionStorage }),
     pathify.plugin
   ]
 });

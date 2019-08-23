@@ -30,7 +30,8 @@ export default {
   computed: {
     getResumeList() {
       return Resume.all();
-    }
+    },
+
   },
   methods: {
     createResume() {

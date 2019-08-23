@@ -20,7 +20,9 @@
             <b-card-text>Tab Contents 2</b-card-text>
           </b-tab>
           <b-tab title="Data">
-            <b-card-text>{{resume}}</b-card-text>
+            <b-card-text>
+              <pre>{{resumeData}}</pre>
+            </b-card-text>
           </b-tab>
         </b-tabs>
       </b-card>
@@ -58,7 +60,11 @@ export default {
     };
   },
   props: ["Id"],
-  computed: {},
+  computed: {
+    resumeData: function() {
+      return  get("resume/resumeData", this.Id);
+    }
+  },
   methods: {
     ...mapActions("resume", ["requestResumeList", "createResume"])
   },
