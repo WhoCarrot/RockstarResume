@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="resume">
+  <b-container class="resume">
     <div>
       <p>{{Id}}</p>
       <b-card no-body>
@@ -21,12 +21,12 @@
           </b-tab>
           <b-tab title="Data">
             <b-card-text>
+              <p>Data: </p>
               <pre>{{resumeData}}</pre>
             </b-card-text>
           </b-tab>
         </b-tabs>
       </b-card>
-      <p>{{resume.firstName}}</p>
     </div>
   </b-container>
 </template>
@@ -44,25 +44,13 @@ export default {
   },
   data() {
     return {
-      resume: {
-        firstName: "",
-        lastName: "",
-        region: "",
-
-        driversLicense: [],
-        languages: [
-          {
-            language: "",
-            proficiency: 0
-          }
-        ]
-      }
+      //Id: this.$route.params.Id
     };
   },
   props: ["Id"],
   computed: {
-    resumeData: function() {
-      return  get("resume/resumeData", this.Id);
+    resumeData() {
+      return this.$store.getters["resume/resumeData"](this.Id);
     }
   },
   methods: {

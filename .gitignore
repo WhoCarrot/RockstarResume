@@ -370,3 +370,5 @@ RockstarResume/.idea/
 RockstarResume.Services/obj/
 
 package-lock.json
+
+.vscode/

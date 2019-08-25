@@ -24,8 +24,7 @@ export default class Resume extends Model {
         language_level: 0
       }]),
       languages: this.hasMany(Language, "resume_id"),
-      educationList: this.attr(null),
-      educations: this.hasMany(Education, "educationList")
+      educations: this.hasMany(Education, "resume_id")
     };
   }
 }

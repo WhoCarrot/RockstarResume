@@ -15,7 +15,7 @@ export default class Education extends Model {
       education_institution: this.attr(""),
       date_from: this.attr(""),
       date_to: this.attr(""),
-      diploma: this.attr(false),
+      graduated: this.attr(false),
       // relationships
       resume: this.belongsTo(Resume, "resume_id")
     };

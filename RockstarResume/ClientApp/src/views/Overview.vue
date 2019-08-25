@@ -25,7 +25,9 @@ export default {
   name: "Overview",
   components: {},
   data() {
-    return {};
+    return {
+      
+    };
   },
   computed: {
     getResumeList() {

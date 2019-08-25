@@ -1,5 +1,25 @@
 <template>
   <b-container class="profile">
+    <!-- Profile Section  -->
+    <b-row>
+      <b-col>
+        <hr />
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col sm="8">
+        <p>Make sure your profile image look professional without filter.</p>
+      </b-col>
+      <b-col sm="4">
+        <avatar />
+      </b-col>
+    </b-row>
+    <!-- Data section -->
+    <b-row>
+      <b-col>
+        <hr />
+      </b-col>
+    </b-row>
     <b-row class="my-1">
       <b-col sm="3">
         <label for="type-text">First name</label>
@@ -71,12 +91,12 @@
     <!-- Languages -->
     <label for="type-text">Languages</label>
 
-    <b-row v-for="(language, index) in languageList" :key="index" class="my-1">
+    <b-row v-for="language in languageList" :key="language.id" class="my-1">
       <b-col sm="5">
         <b-form-input
           list="my-list-id"
           :value="language.language_name"
-          @input="e => { updateLanguageRow(language, e) }"
+          @input="e => { updateLanguageRow(language, {language_name : e}) }"
         ></b-form-input>
 
         <datalist id="my-list-id">
@@ -87,10 +107,17 @@
         </datalist>
       </b-col>
       <b-col sm="6">
-        <b-form-select v-model="language.language_level" :options="options.languageLevels"></b-form-select>
+        <b-form-select
+          @input="e => { updateLanguageRow(language, {language_level : e}) }"
+          :options="options.languageLevels"
+        ></b-form-select>
       </b-col>
       <b-col class="text-left">
-        <b-button variant="link" v-on:click="removeLanguageRow(index)" style="padding: 2px 8px;">
+        <b-button
+          variant="link"
+          v-on:click="removeLanguageRow(language.id)"
+          style="padding: 2px 8px;"
+        >
           <font-awesome-icon icon="trash" style="font-size: 28px" />
         </b-button>
       </b-col>
@@ -102,41 +129,80 @@
         v-on:click="addLanguageRow()"
       >Add language</b-button>
     </div>
+    <b-row>
+      <b-col>
+        <hr />
+      </b-col>
+    </b-row>
     <!-- Education -->
-    <label for="type-text">Languages</label>
-
-    <b-row v-for="(language, index) in languageList" :key="index" class="my-1">
-      <b-col sm="5">
-        <b-form-input
-          list="my-list-id"
-          :value="language.language_name"
-          @input="e => { updateLanguageRow(language, e) }"
-        ></b-form-input>
-
-        <datalist id="my-list-id">
-          <option
-            v-for="(languageOption, index) in options.languageOptions"
-            :key="index"
-          >{{ languageOption.text }}</option>
-        </datalist>
+    <label for="type-text">Educations</label>
+    <b-row v-for="(education, index) in educationList" :key="index + '-education'" class="my-4">
+      <b-col sm="11">
+        <b-row align-v="center" align-h="center">
+          <b-col sm="6">
+            <b-form-input
+              placeholder="Education name"
+              :value="education.education_name"
+              @input="e => { updateEducationRow(education, {education_name : e}) }"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="6">
+            <b-form-input
+              placeholder="Institution"
+              :value="education.education_institution"
+              @input="e => { updateEducationRow(education, {education_institution : e}) }"
+            ></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row class="my-2">
+          <b-col sm="5" align-h="center" align-self="center">
+            <vue-date-picker
+              :dateValue="education.date_from"
+              placeholder="Start date"
+              @value="e => {updateEducationRow(education, {date_from : e})}"
+            ></vue-date-picker>
+          </b-col>
+          <b-col sm="5" align-h="center" align-self="center">
+            <vue-date-picker
+              :dateValue="education.date_to"
+              placeholder="End date"
+              @value="e => {updateEducationRow(education, {date_to : e})}"
+            ></vue-date-picker>
+          </b-col>
+          <b-col sm="2" align-h="center" align-self="center">
+            <b-form-checkbox
+              @input="e => { updateEducationRow(education, {graduated : e}) }"
+              switch
+              size="lg"
+            >Graduated</b-form-checkbox>
+          </b-col>
+        </b-row>
       </b-col>
-      <b-col sm="6">
-        <b-form-select v-model="language.language_level" :options="options.languageLevels"></b-form-select>
+      <b-col sm="1" align-self="center">
+        <b-row align-v="center" align-h="center">
+          <b-col>
+            <b-button
+              variant="link"
+              v-on:click="removeEducationRow(education.id)"
+              style="padding: 2px 8px;"
+            >
+              <font-awesome-icon icon="trash" style="font-size: 28px" />
+            </b-button>
+          </b-col>
+        </b-row>
       </b-col>
-      <b-col class="text-left">
-        <b-button variant="link" v-on:click="removeLanguageRow(index)" style="padding: 2px 8px;">
-          <font-awesome-icon icon="trash" style="font-size: 28px" />
-        </b-button>
+
+      <b-col>
+        <hr />
       </b-col>
     </b-row>
     <div class="col text-center">
       <b-button
         variant="outline-primary"
         class="mx-auto my-1"
-        v-on:click="addLanguageRow()"
-      >Add language</b-button>
+        v-on:click="addEducationRow()"
+      >Add education</b-button>
     </div>
-
     <!-- <b-button
       variant="outline-primary"
       class="mx-auto my-1"
@@ -146,14 +212,19 @@
 </template>
 
 <script>
+import Avatar from "@/components/Avatar";
 import Resume from "@/assets/ts/class/resume";
 import Language from "@/assets/ts/class/language";
 
-import languages_en from "../../assets/js/data/languages.en";
+import languages_en from "@/assets/ts/data/languages.en";
 import { get, sync, dispatch } from "vuex-pathify";
+import Education from "@/assets/ts/class/education";
 
 export default {
   name: "resumeProfile",
+  components: {
+    Avatar
+  },
   data() {
     return {
       options: {
@@ -213,6 +284,9 @@ export default {
       }
     };
   },
+  // components: {
+  //   datePicker
+  // },
   props: ["Id"],
 
   computed: {
@@ -284,34 +358,12 @@ export default {
       return Language.query()
         .where("resume_id", this.Id)
         .get();
-      // .with("languages")
-      // .find(this.Id); //
-      // set(value) {
-      //   console.log(value);
-      //   Resume.update({
-      //     where: this.Id,
-      //     data(resume) {
-      //       resume.language_list = value;
-      //     }
-      //   });
-      // }
     },
-    // educationList: {
-    //   get() {
-    //     return Resume.query()
-    //       .with("educations")
-    //       .find(this.Id);
-    //   },
-    //   set(value) {
-    //     Resume.update({
-    //       where: this.Id,
-    //       data(resume) {
-    //         resume.driversLicenses = value;
-    //       }
-    //     });
-    //   }
-    // },
-
+    educationList: function() {
+      return Education.query()
+        .where("resume_id", this.Id)
+        .get();
+    },
     driversLicenseTitle: function() {
       var $title = "";
       let $count = this.driversLicense.length;
@@ -325,38 +377,42 @@ export default {
     }
   },
   methods: {
-    updateResume: function() {
-      // this.$emit("updateResume", this.resume);
-    },
-    saveResume: function() {},
+    // Profile image upload
+
+    // Language methods
     addLanguageRow: function() {
       this.$store.dispatch("resume/addLanguage", {
         resume_id: this.Id
       });
     },
-    updateLanguageRow(row, e) {
-      console.log(e);
-
+    updateLanguageRow(row, data) {
       console.log(row);
-      Resume.insertOrUpdate({
-        data: {
-          id: this.Id,
-          languages: [{ id: row.id, resume_id: this.Id, language_name: e }]
-        }
+      console.log(data);
+
+      Language.update({
+        where: row.id,
+        data
       });
-      // Language.update({
-      //   where: row.id,
-      //   data: { language_name: e }
-      // });
     },
     removeLanguageRow: function(index) {
-      if (index > -1) {
-        this.resume.languages.splice(index, 1);
-      }
+      Language.delete(index);
+    },
+
+    // Education methods
+    addEducationRow: function() {
+      this.$store.dispatch("resume/addEducation", {
+        resume_id: this.Id
+      });
+    },
+    updateEducationRow(row, data) {
+      Education.update({
+        where: row.id,
+        data
+      });
+    },
+    removeEducationRow: function(id) {
+      Education.delete(id);
     }
-  },
-  created() {
-    //this.updateResume();
   }
 };
 </script>

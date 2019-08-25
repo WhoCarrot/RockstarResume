@@ -2,12 +2,13 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Overview from "./views/Overview.vue";
+import Resume from "./views/Resume.vue";
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: "/",
   routes: [
     {
       path: "/",
@@ -18,11 +19,8 @@ export default new Router({
       path: "/Resume/:Id",
       name: "Resume",
       props: true,
-      // route level code-splitting
-      // this generates a separate chunk (Resume.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "Resume" */ "./views/Resume.vue")
-    }
+      component: Resume
+    },
+    { path: "*", redirect: "/" }
   ]
 });
