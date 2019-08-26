@@ -8,7 +8,7 @@
             <Profile :Id="Id" />
           </b-tab>
           <b-tab title="Introduction">
-            <b-card-text>Tab Contents 2</b-card-text>
+            <introduction/>
           </b-tab>
           <b-tab title="Skills">
             <b-card-text>Tab Contents 2</b-card-text>
@@ -33,6 +33,8 @@
 
 <script>
 import Profile from "@/components/ResumeSections/Profile.vue";
+import Introduction from "@/components/ResumeSections/Introduction.vue";
+
 import Resume from "@/assets/ts/class/resume";
 import { get, sync } from "vuex-pathify";
 import { mapGetters, mapActions } from "vuex";
@@ -40,7 +42,8 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "",
   components: {
-    Profile
+    Profile,
+    Introduction
   },
   data() {
     return {

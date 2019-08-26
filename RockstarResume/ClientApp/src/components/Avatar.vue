@@ -13,7 +13,7 @@
       upload-url="https://demo.overtrue.me/upload.php"
       :labels="{ submit: 'Confirm', cancel: 'Cancel'}"
     />
-    <button class="btn btn-primary btn-sm" id="pick-avatar">Select an new image</button>
+    <button class="btn btn-primary btn-sm" id="pick-avatar">Upload resume picture</button>
   </div>
 </template>
 
