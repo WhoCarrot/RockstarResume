@@ -1,3 +1,4 @@
 import VueDatePicker from "./VueDatePicker.vue";
-
-export default [VueDatePicker];
+import VueInputField from "./VueInputField.vue";
+import VueTitle from "./VueTitle.vue";
+export default [VueDatePicker, VueInputField, VueTitle];

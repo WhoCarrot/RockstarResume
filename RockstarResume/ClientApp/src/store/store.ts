@@ -5,7 +5,6 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import createPersistedState from "vuex-persistedstate";
-import Cookies from "js-cookie";
 
 // Vuex ORM
 // https://github.com/vuex-orm/vuex-orm

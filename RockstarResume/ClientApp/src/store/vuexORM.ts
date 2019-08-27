@@ -5,6 +5,7 @@ import DriversLicense from "@/assets/ts/class/driversLicenses"
 import ItemValue from '@/assets/ts/class/itemValue';
 import Language from '@/assets/ts/class/language';
 import Education from '@/assets/ts/class/education';
+import DualInputValue from '@/assets/ts/class/dualInputValue';
 
 // Create a new database instance.
 const database = new VuexORM.Database()
@@ -15,6 +16,7 @@ database.register(DriversLicense)
 database.register(Language)
 database.register(Education)
 database.register(ItemValue)
+database.register(DualInputValue)
 
 
 export { VuexORM, database}

@@ -1,6 +1,5 @@
 import { Model } from "@vuex-orm/core";
 import Resume from "./resume";
-import ItemValue from "./itemValue";
 
 "use strict";
 

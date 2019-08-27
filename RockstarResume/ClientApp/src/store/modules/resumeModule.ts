@@ -1,7 +1,3 @@
-import store from "../store";
-// pathify
-import { make } from "vuex-pathify";
-
 import Resume from "@/assets/ts/class/resume";
 import Language from "@/assets/ts/class/language";
 import Education from "@/assets/ts/class/education";
