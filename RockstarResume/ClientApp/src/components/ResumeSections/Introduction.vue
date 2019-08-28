@@ -93,8 +93,6 @@ export default {
   name: "resumeIntroduction",
   data() {
     return {
-      firstInput: "wdwd",
-      secondInput: "sgbeopier"
     };
   },
   props: {
@@ -144,10 +142,6 @@ export default {
     removeQualityRow: function (index) {
       DualInputValue.delete(index);
     },
-    updateInput(value) {
-      firstInput = value;
-    },
-    // thriveProfessionally methods
     updateThriveProfessionally(data) {
       DualInputValue.update({
         where: (e) => {

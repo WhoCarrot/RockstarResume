@@ -7,11 +7,11 @@
           <b-tab title="Profile">
             <Profile :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Introduction" active>
+          <b-tab title="Introduction">
             <introduction :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Skills">
-            <b-card-text>Tab Contents 2</b-card-text>
+          <b-tab title="Skills" active>
+            <skills :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Experience">
             <b-card-text>Tab Contents 2</b-card-text>
@@ -34,6 +34,7 @@
 <script>
 import Profile from "@/components/ResumeSections/Profile.vue";
 import Introduction from "@/components/ResumeSections/Introduction.vue";
+import Skills from "@/components/ResumeSections/Skills.vue";
 
 import Resume from "@/assets/ts/class/resume";
 import { get, sync } from "vuex-pathify";
@@ -43,7 +44,8 @@ export default {
   name: "",
   components: {
     Profile,
-    Introduction
+    Introduction,
+    Skills
   },
   data() {
     return {
