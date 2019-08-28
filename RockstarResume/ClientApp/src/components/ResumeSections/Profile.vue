@@ -122,13 +122,16 @@
         </b-button>
       </b-col>
     </b-row>
-    <div class="col text-center">
-      <b-button
-        variant="outline-primary"
-        class="mx-auto my-1"
-        v-on:click="addLanguageRow()"
-      >Add language</b-button>
-    </div>
+    <b-row>
+      <b-col class="text-center">
+        <b-button
+          variant="outline-primary"
+          class="mx-auto my-1"
+          v-on:click="addLanguageRow()"
+        >Add language</b-button>
+      </b-col>
+    </b-row>
+
     <b-row>
       <b-col>
         <hr />
@@ -284,13 +287,13 @@ export default {
       }
     };
   },
-  // components: {
-  //   datePicker
-  // },
-  props: ["Id"],
-
+  props: {
+    Id: {
+      type: Number
+    },
+  },
   computed: {
-    resumeData: function() {
+    resumeData: function () {
       return get("resume/resumeData", this.Id);
     },
     firstName: {
@@ -354,17 +357,17 @@ export default {
         });
       }
     },
-    languageList: function() {
+    languageList: function () {
       return Language.query()
         .where("resume_id", this.Id)
         .get();
     },
-    educationList: function() {
+    educationList: function () {
       return Education.query()
         .where("resume_id", this.Id)
         .get();
     },
-    driversLicenseTitle: function() {
+    driversLicenseTitle: function () {
       var $title = "";
       let $count = this.driversLicense.length;
       if ($count > 0) {
@@ -380,7 +383,7 @@ export default {
     // Profile image upload
 
     // Language methods
-    addLanguageRow: function() {
+    addLanguageRow: function () {
       this.$store.dispatch("resume/addLanguage", {
         resume_id: this.Id
       });
@@ -394,12 +397,12 @@ export default {
         data
       });
     },
-    removeLanguageRow: function(index) {
+    removeLanguageRow: function (index) {
       Language.delete(index);
     },
 
     // Education methods
-    addEducationRow: function() {
+    addEducationRow: function () {
       this.$store.dispatch("resume/addEducation", {
         resume_id: this.Id
       });
@@ -410,7 +413,7 @@ export default {
         data
       });
     },
-    removeEducationRow: function(id) {
+    removeEducationRow: function (id) {
       Education.delete(id);
     }
   }

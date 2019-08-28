@@ -1,6 +1,7 @@
 import Resume from "@/assets/ts/class/resume";
 import Language from "@/assets/ts/class/language";
 import Education from "@/assets/ts/class/education";
+import DualInputValue from "@/assets/ts/class/dualInputValue";
 
 // initial state
 const state = {};
@@ -19,10 +20,8 @@ const actions = {
   requestResumeList(state: any, commit: any) {
     //TODO temporary data population
     // TODO Call to API to return the stored Resumes
-
-    Resume.insertOrUpdate({
-      data: [{ id: 252 }, { id: 3462 }]
-    });
+    state.commit("createResume", 999);
+    state.commit("createResume", 4444);
   },
   addLanguage(state: any, payload: any) {
     state.commit("addLanguage", payload.resume_id);
@@ -30,8 +29,12 @@ const actions = {
   addEducation(state: any, payload: any) {
     state.commit("addEducation", payload.resume_id);
   },
+  addQuality(state: any, payload: any) {
+    state.commit("addQuality", payload.resume_id);
+  },
   addResume(state: any) {
-    state.commit("addResume");
+    const resume_id = Math.round(Math.random() * (10000 - 1) + 1);
+    state.commit("createResume", resume_id);
   }
 };
 
@@ -41,13 +44,35 @@ const mutations = {
     state.resumeList = resumeList;
   },
 
-  addResume(state: any) {
-    const id = Math.round(Math.random() * (10000 - 1) + 1);
-    Resume.insert({ data: { id } });
-  },
-  createResume(state: any) {
-    const id = Math.round(Math.random() * (10000 - 1) + 1);
-    Resume.insert({ data: { id } });
+  createResume(state: any, resume_id: number) {
+    Resume.insertOrUpdate({
+      data: {
+        id: resume_id,
+        qualities: [{ resume_id, type: "quality" }],
+        thriveProfessionally: {
+          resume_id,
+          type: "thriveProfessionally"
+        },
+        whatColleguesNeedToKnow: {
+          resume_id,
+          type: "whatColleguesNeedToKnow"
+        },
+        thingsInFutureProjects: [
+          {
+            resume_id,
+            type: "thingsInFutureProjects"
+          },
+          {
+            resume_id,
+            type: "thingsInFutureProjects"
+          },
+          {
+            resume_id,
+            type: "thingsInFutureProjects"
+          }
+        ]
+      }
+    });
   },
   addLanguage(state: any, resume_id: number) {
     Language.insert({
@@ -67,6 +92,14 @@ const mutations = {
         date_from: "",
         date_to: "",
         diploma: false
+      }
+    });
+  },
+  addQuality(state: any, resume_id: number) {
+    DualInputValue.insert({
+      data: {
+        resume_id: Number(resume_id),
+        type: "quality"
       }
     });
   }

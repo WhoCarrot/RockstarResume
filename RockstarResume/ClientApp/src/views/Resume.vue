@@ -4,11 +4,11 @@
       <p>{{Id}}</p>
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Profile" active>
-            <Profile :Id="Id" />
+          <b-tab title="Profile">
+            <Profile :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Introduction">
-            <introduction/>
+          <b-tab title="Introduction" active>
+            <introduction :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Skills">
             <b-card-text>Tab Contents 2</b-card-text>
@@ -21,7 +21,7 @@
           </b-tab>
           <b-tab title="Data">
             <b-card-text>
-              <p>Data: </p>
+              <p>Data:</p>
               <pre>{{resumeData}}</pre>
             </b-card-text>
           </b-tab>
@@ -59,10 +59,6 @@ export default {
   methods: {
     ...mapActions("resume", ["requestResumeList", "createResume"])
   },
-
-  beforeMount() {
-    this.$store.dispatch("resume/requestResumeList");
-  }
 };
 </script>
 

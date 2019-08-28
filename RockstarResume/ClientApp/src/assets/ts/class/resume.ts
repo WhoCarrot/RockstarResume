@@ -2,7 +2,7 @@ import { Model } from "@vuex-orm/core";
 import DriversLicense from "./driversLicenses";
 import Education from "./education";
 import Language from "./language";
-import DualInputValue from './dualInputValue';
+import DualInputValue from "./dualInputValue";
 
 "use strict";
 
@@ -31,7 +31,10 @@ export default class Resume extends Model {
       educations: this.hasMany(Education, "resume_id"),
 
       //Introduction
-      qualities: this.hasMany(DualInputValue, "resume_id")
+      qualities: this.hasMany(DualInputValue, "resume_id"),
+      thriveProfessionally: this.hasOne(DualInputValue, "resume_id"),
+      whatColleguesNeedToKnow: this.hasOne(DualInputValue, "resume_id"),
+      thingsInFutureProjects: this.hasMany(DualInputValue, "resume_id")
     };
   }
 }

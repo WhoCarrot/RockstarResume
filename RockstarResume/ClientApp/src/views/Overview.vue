@@ -11,7 +11,7 @@
       <b-button
         variant="outline-primary"
         class="mx-auto my-1"
-        v-on:click="createResume()"
+        v-on:click="addResume()"
       >Add Resume</b-button>
     </div>
   </b-container>
@@ -36,13 +36,10 @@ export default {
 
   },
   methods: {
-    createResume() {
+    addResume() {
       this.$store.dispatch("resume/addResume");
     }
   },
-  beforeMount() {
-    this.$store.dispatch("resume/requestResumeList");
-  }
 };
 </script>
 
