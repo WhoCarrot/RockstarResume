@@ -10,13 +10,13 @@
           <b-tab title="Introduction">
             <introduction :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Skills" active>
+          <b-tab title="Skills">
             <skills :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Experience">
-            <b-card-text>Tab Contents 2</b-card-text>
+          <b-tab title="Experience" active>
+            <experience :Id="Number(Id)"/>
           </b-tab>
-          <b-tab title="Extra" active>
+          <b-tab title="Extra" >
             <extra :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Data">

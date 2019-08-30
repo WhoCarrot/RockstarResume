@@ -15,3 +15,4 @@ export default class DualInputValue extends Model {
     };
   }
 }
+ 

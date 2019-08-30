@@ -16,8 +16,6 @@ const getters = {
       .first();
 
     if (data) {
-      console.log(data);
-
       // This is done because I use the same model DualInputValue to set the relationships in Resume model.
       // Vuex-orm can therefore not differentiate because it doesnt account for the type property, which it is now being filtered on.
       // Only add relationshipfields which are "this.hasMany(DualInputValue, "resume_id")"
@@ -130,6 +128,22 @@ const mutations = {
 
       }
     });
+
+    // DualInputValue.insert({
+    //   data: {
+    //     resume_id, type: "thriveProfessionally",
+    //     dutch_value: "LOL",
+    //     english_value: "BBQ"
+    //   }
+    // });
+
+    // DualInputValue.insert({
+    //   data: {
+    //     resume_id, type: "whatColleguesNeedToKnow",
+    //     dutch_value: "LOL",
+    //     english_value: "BBQ"
+    //   }
+    // });
   },
   addLanguage(state: any, resume_id: number) {
     Language.insert({

@@ -49,18 +49,18 @@ export default {
       }
     };
   },
-  props: ["dateValue", "value", "placeholder"],
+  props: ["value", "placeholder"],
   computed: {
     date() {
-      console.log(this.dateValue);
+      console.log(this.value);
 
-      return this.dateValue;
+      return this.value;
     }
   },
   methods: {
     dateChange(date) {
-      console.log(date);
       this.$emit("value", date);
+       this.$emit("input", date);
     }
   }
 };

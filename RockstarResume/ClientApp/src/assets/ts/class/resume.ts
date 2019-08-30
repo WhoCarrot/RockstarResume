@@ -3,6 +3,7 @@ import DriversLicense from "./driversLicenses";
 import Education from "./education";
 import Language from "./language";
 import DualInputValue from "./dualInputValue";
+import Experience from "./experience";
 
 "use strict";
 
@@ -27,6 +28,9 @@ export default class Resume extends Model {
       thriveProfessionally: this.hasOne(DualInputValue, "resume_id"),
       whatColleguesNeedToKnow: this.hasOne(DualInputValue, "resume_id"),
       thingsInFutureProjects: this.hasMany(DualInputValue, "resume_id"),
+
+      //Experience
+      experiences: this.hasMany(Experience, "resume_id"),
 
       //Extra
       certificates: this.hasMany(DualInputValue, "resume_id"),
