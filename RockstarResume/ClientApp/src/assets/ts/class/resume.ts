@@ -7,6 +7,7 @@ import DualInputValue from "./dualInputValue";
 "use strict";
 
 export default class Resume extends Model {
+  [x: string]: any;
   static entity = "resumes";
 
   static fields() {
@@ -18,15 +19,6 @@ export default class Resume extends Model {
       region: this.attr(""),
       nationality: this.attr(""),
       driversLicenses: this.attr([]),
-
-      // relationships
-      languageList: this.attr([
-        {
-          resume_id: this.id,
-          language_name: "",
-          language_level: 0
-        }
-      ]),
       languages: this.hasMany(Language, "resume_id"),
       educations: this.hasMany(Education, "resume_id"),
 
@@ -34,7 +26,13 @@ export default class Resume extends Model {
       qualities: this.hasMany(DualInputValue, "resume_id"),
       thriveProfessionally: this.hasOne(DualInputValue, "resume_id"),
       whatColleguesNeedToKnow: this.hasOne(DualInputValue, "resume_id"),
-      thingsInFutureProjects: this.hasMany(DualInputValue, "resume_id")
+      thingsInFutureProjects: this.hasMany(DualInputValue, "resume_id"),
+
+      //Extra
+      certificates: this.hasMany(DualInputValue, "resume_id"),
+      competenties: this.hasMany(DualInputValue, "resume_id"),
+      studies: this.hasMany(DualInputValue, "resume_id"),
+      hobbiesAndInterests: this.hasMany(DualInputValue, "resume_id")
     };
   }
 }

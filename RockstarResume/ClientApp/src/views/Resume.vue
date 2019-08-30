@@ -16,8 +16,8 @@
           <b-tab title="Experience">
             <b-card-text>Tab Contents 2</b-card-text>
           </b-tab>
-          <b-tab title="Extra">
-            <b-card-text>Tab Contents 2</b-card-text>
+          <b-tab title="Extra" active>
+            <extra :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Data">
             <b-card-text>
@@ -35,17 +35,21 @@
 import Profile from "@/components/ResumeSections/Profile.vue";
 import Introduction from "@/components/ResumeSections/Introduction.vue";
 import Skills from "@/components/ResumeSections/Skills.vue";
+import Extra from "@/components/ResumeSections/Extra.vue";
+import Experience from "@/components/ResumeSections/Experience.vue";
 
 import Resume from "@/assets/ts/class/resume";
 import { get, sync } from "vuex-pathify";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "",
+  name: "resume",
   components: {
     Profile,
     Introduction,
-    Skills
+    Skills,
+    Experience,
+    Extra
   },
   data() {
     return {

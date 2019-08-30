@@ -8,11 +8,39 @@ const state = {};
 
 // getters
 const getters = {
-  resumeData: (state: any) => (id: number) =>
-    Resume.query()
+  resumeData: (state: any) => (id: number) => {
+    var data = Resume.query()
       .whereId(id)
+      //.with("thriveProfessionally")
       .withAll()
-      .first()
+      .first();
+
+    if (data) {
+      console.log(data);
+
+      // This is done because I use the same model DualInputValue to set the relationships in Resume model.
+      // Vuex-orm can therefore not differentiate because it doesnt account for the type property, which it is now being filtered on.
+      // Only add relationshipfields which are "this.hasMany(DualInputValue, "resume_id")"
+      var types = [
+        "qualities",
+        "thingsInFutureProjects",
+        "certificates",
+        "competenties",
+        "studies",
+        "hobbiesAndInterests"
+      ];
+      for (let i = 0; i < types.length; i++) {
+        let type = types[i];
+        if (data[type] && data[type].length > 0) {
+          data[type] = data[type].filter(
+            (obj: DualInputValue) => obj.type === type
+          );
+        }
+      }
+    }
+
+    return data;
+  }
 };
 
 // actions
@@ -29,8 +57,8 @@ const actions = {
   addEducation(state: any, payload: any) {
     state.commit("addEducation", payload.resume_id);
   },
-  addQuality(state: any, payload: any) {
-    state.commit("addQuality", payload.resume_id);
+  addDualInputValue(state: any, payload: any) {
+    state.commit("addDualInputValue", payload);
   },
   addResume(state: any) {
     const resume_id = Math.round(Math.random() * (10000 - 1) + 1);
@@ -51,11 +79,15 @@ const mutations = {
         qualities: [{ resume_id, type: "quality" }],
         thriveProfessionally: {
           resume_id,
-          type: "thriveProfessionally"
+          type: "thriveProfessionally",
+          dutch_value: "LOL",
+          english_value: "BBQ"
         },
         whatColleguesNeedToKnow: {
           resume_id,
-          type: "whatColleguesNeedToKnow"
+          type: "whatColleguesNeedToKnow",
+          dutch_value: "LOL",
+          english_value: "BBQ"
         },
         thingsInFutureProjects: [
           {
@@ -70,7 +102,32 @@ const mutations = {
             resume_id,
             type: "thingsInFutureProjects"
           }
-        ]
+        ],
+        certificates: [
+          {
+            resume_id,
+            type: "certificates"
+          }
+        ],
+        competenties: [
+          {
+            resume_id,
+            type: "competenties"
+          }
+        ],
+        studies: [
+          {
+            resume_id,
+            type: "studies"
+          }
+        ],
+        hobbiesAndInterests: [
+          {
+            resume_id,
+            type: "hobbiesAndInterests"
+          }
+        ],
+
       }
     });
   },
@@ -95,11 +152,11 @@ const mutations = {
       }
     });
   },
-  addQuality(state: any, resume_id: number) {
+  addDualInputValue(state: any, payload: any) {
     DualInputValue.insert({
       data: {
-        resume_id: Number(resume_id),
-        type: "quality"
+        resume_id: Number(payload.resume_id),
+        type: payload.type
       }
     });
   }

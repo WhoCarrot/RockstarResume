@@ -6,13 +6,16 @@
 export default {
   name: "vue-title",
   props: {
-      text: {
-          type: String,
-          default: ""
-      },
+    text: {
+      type: String,
+      default: ""
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+h5 {
+  font-size: 18px;
+}
 </style>
