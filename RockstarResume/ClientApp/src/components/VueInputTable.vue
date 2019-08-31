@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import DualInputValue from "@/assets/ts/class/dualInputValue";
 
 export default {
   name: "inputTable",
@@ -44,9 +43,8 @@ export default {
       type: String,
       required: true
     },
-    type: {
-      type: String,
-      required: true
+    classmodal: {
+      type: Function
     },
     addbutton: {
       type: Boolean,
@@ -67,9 +65,8 @@ export default {
   },
   computed: {
     itemList: function () {
-      return DualInputValue.query()
+      return this.classmodal.query()
         .where("resume_id", this.id)
-        .where('type', this.type)
         .get();
     },
     itemListLength: function () {
@@ -78,20 +75,25 @@ export default {
   },
   methods: {
     addRow: function () {
-      this.$store.dispatch("resume/addDualInputValue", {
-        resume_id: this.id,
-        type: this.type
+      this.classmodal.insert({
+        data: {
+          resume_id: this.id,
+        }
       });
+      // this.$store.dispatch("resume/addDualInputValue", {
+      // resume_id: this.id,
+      // type: this.type
+      // });
     },
     updateRow(row, data) {
-      DualInputValue.update({
+      this.classmodal.update({
         where: row.id,
         data
       });
     },
     removeRow: function (index) {
       if (this.itemListLength > 1) {
-        DualInputValue.delete(index);
+        this.classmodal.delete(index);
       }
     },
   }

@@ -1,9 +1,7 @@
 import { Model } from "@vuex-orm/core";
-import DriversLicense from "./driversLicenses";
-import Education from "./education";
-import Language from "./language";
-import DualInputValue from "./dualInputValue";
 import Skill from './skill';
+import ExperienceTitle from './inputvalue/experienceTitle';
+import ExperienceBranch from './inputvalue/experienceBranch';
 
 "use strict";
 
@@ -21,9 +19,11 @@ export default class Experience extends Model {
       city: this.attr(""),
       date_from: this.attr(""),
       date_to: this.attr(""),
+      
 
-      title: this.hasOne(DualInputValue, "experience_id"),
-      branch: this.hasOne(DualInputValue, "experience_id"),
+      title: this.hasOne(ExperienceTitle, "experience_id"),
+      branch: this.hasOne(ExperienceBranch, "experience_id"),
+
       programmingLanguages: this.hasMany(Skill, "resume_id"),
 
     };

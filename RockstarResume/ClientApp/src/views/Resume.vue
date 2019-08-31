@@ -17,7 +17,7 @@
             <experience :Id="Number(Id)"/>
           </b-tab>
           <b-tab title="Extra" >
-            <extra :Id="Number(Id)" />
+            <!-- <extra :Id="Number(Id)" /> -->
           </b-tab>
           <b-tab title="Data">
             <b-card-text>

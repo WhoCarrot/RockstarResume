@@ -4,25 +4,30 @@
       <!-- Certificates -->
       <vue-input-table
         :id="Number(Id)"
-        type="certificates"
+        :classmodal="certificateValue"
         header="Certificates"
         buttontext="Add certificate"
       />
       <!-- Competenties -->
       <vue-input-table
         :id="Number(Id)"
-        type="competenties"
+        :classmodal="competencyValue"
         header="Competenties"
         buttontext="Add competency"
       />
 
       <!-- Studies -->
-      <vue-input-table :id="Number(Id)" type="studies" header="Studies" buttontext="Add study" />
+      <vue-input-table
+        :id="Number(Id)"
+        :classmodal="studyValue"
+        header="Studies"
+        buttontext="Add study"
+      />
 
       <!-- Hobbies/interests -->
       <vue-input-table
         :id="Number(Id)"
-        type="hobbiesAndInterests"
+        :classmodal="interestsValue"
         header="Hobbies & Interests"
         buttontext="Add hobbies/interests"
       />
@@ -32,6 +37,10 @@
 
 <script>
 import VueInputTable from "@/components/VueInputTable.vue";
+import Certificate from "@/assets/ts/class/inputvalue/certificate"
+import Competency from "@/assets/ts/class/inputvalue/competency"
+import Study from "@/assets/ts/class/inputvalue/study"
+import Interests from "@/assets/ts/class/inputvalue/interests"
 
 export default {
   name: "resumeExtra",
@@ -42,6 +51,20 @@ export default {
   },
   components: {
     VueInputTable,
+  },
+  computed: {
+    certificateValue: function () {
+      return Certificate;
+    },
+    competencyValue: function () {
+      return Competency;
+    },
+    studyValue: function () {
+      return Study;
+    },
+    interestsValue: function () {
+      return Interests;
+    },
   },
 }
 </script>

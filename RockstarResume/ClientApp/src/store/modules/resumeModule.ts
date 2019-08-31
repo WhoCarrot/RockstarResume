@@ -1,7 +1,7 @@
 import Resume from "@/assets/ts/class/resume";
 import Language from "@/assets/ts/class/language";
 import Education from "@/assets/ts/class/education";
-import DualInputValue from "@/assets/ts/class/dualInputValue";
+import DualInputValue from "@/assets/ts/class/inputvalue/dualInputValue";
 import Experience from "@/assets/ts/class/experience";
 
 // initial state
@@ -12,32 +12,8 @@ const getters = {
   resumeData: (state: any) => (id: number) => {
     var data = Resume.query()
       .whereId(id)
-      //.with("thriveProfessionally")
-      //.withAll()
-      .withAllRecursive()
+      .withAllRecursive(5)
       .first();
-
-    if (data) {
-      // This is done because I use the same model DualInputValue to set the relationships in Resume model.
-      // Vuex-orm can therefore not differentiate because it doesnt account for the type property, which it is now being filtered on.
-      // Only add relationshipfields which are "this.hasMany(DualInputValue, "resume_id")"
-      var types = [
-        "qualities",
-        "thingsInFutureProjects",
-        "certificates",
-        "competenties",
-        "studies",
-        "hobbiesAndInterests"
-      ];
-      for (let i = 0; i < types.length; i++) {
-        let type = types[i];
-        if (data[type] && data[type].length > 0) {
-          data[type] = data[type].filter(
-            (obj: DualInputValue) => obj.type === type
-          );
-        }
-      }
-    }
 
     return data;
   }
@@ -73,143 +49,82 @@ const mutations = {
   },
 
   createResume(state: any, resume_id: number) {
+    const exp_id = random_id();
     Resume.insertOrUpdate({
       data: {
         id: resume_id,
-        qualities: [{ resume_id, type: "quality" }],
-        thriveProfessionally: [{
-          resume_id,
-          type: "thriveProfessionally",
-          dutch_value: "LOL",
-          english_value: "BBQ"
-        }],
-        // whatColleguesNeedToKnow: [{
-        //   resume_id,
-        //   type: "whatColleguesNeedToKnow",
-        //   dutch_value: "LOL",
-        //   english_value: "BBQ"
-        // }],
-        thingsInFutureProjects: [
+        // Introduction page
+        qualities: [
           {
             resume_id,
-            type: "thingsInFutureProjects"
-          },
-          {
-            resume_id,
-            type: "thingsInFutureProjects"
-          },
-          {
-            resume_id,
-            type: "thingsInFutureProjects"
+            type: "quality"
           }
         ],
+        introQuestion1: {
+          id: random_id(),
+          resume_id
+        },
+        introQuestion2: {
+          id: random_id(),
+          resume_id
+        },
+        introQuestion3: [
+          {
+            id: random_id(),
+            resume_id
+          },
+          {
+            id: random_id(),
+            resume_id
+          },
+          {
+            id: random_id(),
+            resume_id
+          }
+        ],
+        // Experience
+        experiences: [
+          {
+            id: exp_id,
+            resume_id,
+            title: {
+              id: random_id(),
+              experience_id: exp_id,
+              resume_id
+            },
+            branch: {
+              id: random_id(),
+              experience_id: exp_id,
+              resume_id
+            }
+          }
+        ],
+        // Extra
         certificates: [
           {
-            resume_id,
-            type: "certificates"
+            id: random_id(),
+            resume_id
           }
         ],
         competenties: [
           {
-            resume_id,
-            type: "competenties"
+            id: random_id(),
+            resume_id
           }
         ],
         studies: [
           {
-            resume_id,
-            type: "studies"
+            id: random_id(),
+            resume_id
           }
         ],
-        hobbiesAndInterests: [
+        interests: [
           {
-            resume_id,
-            type: "hobbiesAndInterests"
-          }
-        ],
-        experiences: [
-          {
+            id: random_id(),
             resume_id
           }
         ]
       }
-    }).then(entities => {
-      const resume_id = entities.resumes[0].id;
-      // DualInputValue.insert({
-      //   data: [
-      //     {
-      //       resume_id,
-      //       type: "thriveProfessionally",
-      //       dutch_value: "LOL",
-      //       english_value: "BBQ"
-      //     },
-      //     {
-      //       resume_id,
-      //       type: "whatColleguesNeedToKnow",
-      //       dutch_value: "LOL",
-      //       english_value: "BBQ"
-      //     }
-      //   ]
-      // });
-
-      // Resume.insertOrUpdate({
-      //   data: {
-      //     id: resume_id,
-      //     whatColleguesNeedToKnow: {
-      //       resume_id,
-      //       type: "what_collegues_need_to_know",
-      //       dutch_value: "LOL",
-      //       english_value: "BBQ"
-      //     }
-      //   }
-      // })
-      //   .then(entities => {
-      //   Resume.insertOrUpdate({
-      //     data: {
-      //       id: resume_id,
-      //       thriveProfessionally: {
-      //         resume_id,
-      //         type: "thrive_professionally",
-      //         dutch_value: "LOL",
-      //         english_value: "BBQ"
-      //       }
-      //     }
-      //   });
-      // });
-
-      // Experience.insertOrUpdate({
-      //   data: {
-      //     id: entities.experience[0].id,
-      //     resume_id,
-      //     title: {
-      //       resume_id,
-      //       experience_id: entities.experience[0].id,
-      //       type: "experienceTitle"
-      //     },
-      //     branch: {
-      //       resume_id,
-      //       experience_id: entities.experience[0].id,
-      //       type: "experienceBranch"
-      //     }
-      //   }
-      // });
-
-      // DualInputValue.insert({
-      //   data: [
-      //     {
-      //       resume_id: entities.resumes[0].$id,
-      //       experience_id: entities.experience[0].$id,
-      //       type: "experienceTitle"
-      //     },
-      //     {
-      //       resume_id: entities.resumes[0].$id,
-      //       experience_id: entities.experience[0].$id,
-      //       type: "experienceBranch"
-      //     }
-      //   ]
-      // });
-
-      console.log(entities);
     });
   },
   addLanguage(state: any, resume_id: number) {
@@ -242,6 +157,10 @@ const mutations = {
     });
   }
 };
+
+function random_id() {
+  return Math.round(Math.random() * (10000 - 1) + 1);
+}
 
 export default {
   namespaced: true,

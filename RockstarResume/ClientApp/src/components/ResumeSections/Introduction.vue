@@ -3,7 +3,7 @@
     <!-- Qualities -->
     <vue-input-table
       :id="Number(Id)"
-      type="quality"
+      :classmodal="quality"
       header="How do colleagues describe you?"
       buttontext="Add quality"
     />
@@ -11,7 +11,7 @@
     <!-- When do you thrive professionally? -->
     <vue-input-table
       :id="Number(Id)"
-      type="thriveProfessionally"
+      :classmodal="introQuestion1Value"
       header="When do you thrive professionally?"
       :addbutton="false"
       :textarea="true"
@@ -21,8 +21,8 @@
     <!-- What should colleagues need to know about you? -->
     <vue-input-table
       :id="Number(Id)"
-      type="whatColleguesNeedToKnow"
       header="What should colleagues need to know about you?"
+      :classmodal="introQuestion2Value"
       :addbutton="false"
       :textarea="true"
       :removable="false"
@@ -31,7 +31,7 @@
     <!-- Which 3 things would you like to see in your future project: -->
     <vue-input-table
       :id="Number(Id)"
-      type="thingsInFutureProjects"
+      :classmodal="introQuestion3Value"
       header="Which 3 things would you like to see in your future project?"
       :removable="false"
       :addbutton="false"
@@ -40,8 +40,12 @@
 </template>
 
 <script>
-import DualInputValue from "@/assets/ts/class/dualInputValue";
+import DualInputValue from "@/assets/ts/class/inputvalue/dualInputValue";
 import VueInputTable from "@/components/VueInputTable.vue";
+import Quality from "@/assets/ts/class/inputvalue/quality"
+import IntroQuestion1 from "@/assets/ts/class/inputvalue/introQuestion1"
+import IntroQuestion2 from "@/assets/ts/class/inputvalue/introQuestion2"
+import IntroQuestion3 from "@/assets/ts/class/inputvalue/introQuestion3"
 
 export default {
   name: "resumeIntroduction",
@@ -58,6 +62,18 @@ export default {
     },
   },
   computed: {
+    quality: function () {
+      return Quality;
+    },
+    introQuestion1Value: function () {
+      return IntroQuestion1;
+    },
+    introQuestion2Value: function () {
+      return IntroQuestion2;
+    },
+    introQuestion3Value: function () {
+      return IntroQuestion3;
+    },
   },
   methods: {
   }

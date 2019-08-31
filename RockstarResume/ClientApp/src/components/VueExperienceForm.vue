@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import DualInputValue from "@/assets/ts/class/dualInputValue";
+import DualInputValue from "@/assets/ts/class/inputvalue/dualInputValue";
 import Experience from "@/assets/ts/class/experience";
 
 export default {
@@ -105,7 +105,7 @@ export default {
   props: {
     experience: {
       type: Object,
-      default: {},
+      required: true,
 
     },
   },

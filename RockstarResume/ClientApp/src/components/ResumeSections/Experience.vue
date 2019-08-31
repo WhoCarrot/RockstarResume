@@ -50,6 +50,7 @@ import VueExperienceForm from "@/components/VueExperienceForm.vue";
 import Resume from "@/assets/ts/class/resume";
 import Experience from "@/assets/ts/class/experience";
 
+
 export default {
   name: "resumeExperience",
   props: {
@@ -104,7 +105,7 @@ export default {
         setTimeout(function () {
           x.showModal(true);
           console.log("Stop");
-        }, 100);
+        }, 500);
 
       } else {
         this.experience_id = experience_id;
