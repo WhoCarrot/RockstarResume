@@ -20,11 +20,11 @@ export default {
   props: {
     firstLabel: {
       type: String,
-      default: ""
+      default: "Dutch"
     },
     secondLabel: {
       type: String,
-      default: ""
+      default: "English"
     },
   },
   computed: {

@@ -2,6 +2,7 @@ import Resume from "@/assets/ts/class/resume";
 import Language from "@/assets/ts/class/language";
 import Education from "@/assets/ts/class/education";
 import DualInputValue from "@/assets/ts/class/dualInputValue";
+import Experience from "@/assets/ts/class/experience";
 
 // initial state
 const state = {};
@@ -12,7 +13,8 @@ const getters = {
     var data = Resume.query()
       .whereId(id)
       //.with("thriveProfessionally")
-      .withAll()
+      //.withAll()
+      .withAllRecursive()
       .first();
 
     if (data) {
@@ -75,18 +77,18 @@ const mutations = {
       data: {
         id: resume_id,
         qualities: [{ resume_id, type: "quality" }],
-        thriveProfessionally: {
+        thriveProfessionally: [{
           resume_id,
           type: "thriveProfessionally",
           dutch_value: "LOL",
           english_value: "BBQ"
-        },
-        whatColleguesNeedToKnow: {
-          resume_id,
-          type: "whatColleguesNeedToKnow",
-          dutch_value: "LOL",
-          english_value: "BBQ"
-        },
+        }],
+        // whatColleguesNeedToKnow: [{
+        //   resume_id,
+        //   type: "whatColleguesNeedToKnow",
+        //   dutch_value: "LOL",
+        //   english_value: "BBQ"
+        // }],
         thingsInFutureProjects: [
           {
             resume_id,
@@ -125,25 +127,90 @@ const mutations = {
             type: "hobbiesAndInterests"
           }
         ],
-
+        experiences: [
+          {
+            resume_id
+          }
+        ]
       }
+    }).then(entities => {
+      const resume_id = entities.resumes[0].id;
+      // DualInputValue.insert({
+      //   data: [
+      //     {
+      //       resume_id,
+      //       type: "thriveProfessionally",
+      //       dutch_value: "LOL",
+      //       english_value: "BBQ"
+      //     },
+      //     {
+      //       resume_id,
+      //       type: "whatColleguesNeedToKnow",
+      //       dutch_value: "LOL",
+      //       english_value: "BBQ"
+      //     }
+      //   ]
+      // });
+
+      // Resume.insertOrUpdate({
+      //   data: {
+      //     id: resume_id,
+      //     whatColleguesNeedToKnow: {
+      //       resume_id,
+      //       type: "what_collegues_need_to_know",
+      //       dutch_value: "LOL",
+      //       english_value: "BBQ"
+      //     }
+      //   }
+      // })
+      //   .then(entities => {
+      //   Resume.insertOrUpdate({
+      //     data: {
+      //       id: resume_id,
+      //       thriveProfessionally: {
+      //         resume_id,
+      //         type: "thrive_professionally",
+      //         dutch_value: "LOL",
+      //         english_value: "BBQ"
+      //       }
+      //     }
+      //   });
+      // });
+
+      // Experience.insertOrUpdate({
+      //   data: {
+      //     id: entities.experience[0].id,
+      //     resume_id,
+      //     title: {
+      //       resume_id,
+      //       experience_id: entities.experience[0].id,
+      //       type: "experienceTitle"
+      //     },
+      //     branch: {
+      //       resume_id,
+      //       experience_id: entities.experience[0].id,
+      //       type: "experienceBranch"
+      //     }
+      //   }
+      // });
+
+      // DualInputValue.insert({
+      //   data: [
+      //     {
+      //       resume_id: entities.resumes[0].$id,
+      //       experience_id: entities.experience[0].$id,
+      //       type: "experienceTitle"
+      //     },
+      //     {
+      //       resume_id: entities.resumes[0].$id,
+      //       experience_id: entities.experience[0].$id,
+      //       type: "experienceBranch"
+      //     }
+      //   ]
+      // });
+
+      console.log(entities);
     });
-
-    // DualInputValue.insert({
-    //   data: {
-    //     resume_id, type: "thriveProfessionally",
-    //     dutch_value: "LOL",
-    //     english_value: "BBQ"
-    //   }
-    // });
-
-    // DualInputValue.insert({
-    //   data: {
-    //     resume_id, type: "whatColleguesNeedToKnow",
-    //     dutch_value: "LOL",
-    //     english_value: "BBQ"
-    //   }
-    // });
   },
   addLanguage(state: any, resume_id: number) {
     Language.insert({

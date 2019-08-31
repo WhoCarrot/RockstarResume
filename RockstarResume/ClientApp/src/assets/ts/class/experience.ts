@@ -21,13 +21,11 @@ export default class Experience extends Model {
       city: this.attr(""),
       date_from: this.attr(""),
       date_to: this.attr(""),
-      branch: this.attr(""),
-      title: this.attr(""),
 
+      title: this.hasOne(DualInputValue, "experience_id"),
+      branch: this.hasOne(DualInputValue, "experience_id"),
       programmingLanguages: this.hasMany(Skill, "resume_id"),
 
-      languages: this.hasMany(Language, "resume_id"),
-      educations: this.hasMany(Education, "resume_id")
     };
   }
   

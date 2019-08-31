@@ -12,7 +12,6 @@
             required
           ></b-form-input>
         </b-col>
-
         <b-col sm="6">
           <b-form-input
             id="input-last-name"
@@ -38,6 +37,42 @@
             @input="e => { updateInput({date_to : e}) }"
             placeholder="End date"
           ></vue-date-picker>
+        </b-col>
+      </b-row>
+      <!-- Experience title -->
+      <b-row class="my-4">
+        <b-col>
+          <b-row>
+            <b-col>
+              <vue-title text="Title" />
+            </b-col>
+          </b-row>
+          <vue-input-label />
+          <vue-input-field
+            :firstInput="this.experience.title.dutch_value"
+            :secondInput="this.experience.title.english_value"
+            @firstInput="e => { updateInput({title:{english_value: this.experience.title.english_value, dutch_value : e}}) }"
+            @secondInput="e => { updateInput({title:{english_value : e, dutch_value :this.experience.title.dutch_value}}) }"
+            :removable="false"
+          />
+        </b-col>
+      </b-row>
+      <!-- Experience Branch -->
+      <b-row class="my-4">
+        <b-col>
+          <b-row>
+            <b-col>
+              <vue-title text="Branch" />
+            </b-col>
+          </b-row>
+          <vue-input-label />
+          <vue-input-field
+            :firstInput="this.experience.branch.dutch_value"
+            :secondInput="this.experience.branch.english_value"
+            @firstInput="e => { updateInput({branch:{english_value: this.experience.branch.english_value, dutch_value : e}}) }"
+            @secondInput="e => { updateInput({branch:{english_value : e, dutch_value :this.experience.branch.dutch_value}}) }"
+            :removable="false"
+          />
         </b-col>
       </b-row>
       <b-row>
