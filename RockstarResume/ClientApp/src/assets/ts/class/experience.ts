@@ -15,7 +15,7 @@ export default class Experience extends Model {
       id: this.increment(),
       resume_id: this.attr(null),
 
-      companyName: this.attr(""),
+      company_name: this.attr(""),
       city: this.attr(""),
       date_from: this.attr(""),
       date_to: this.attr(""),

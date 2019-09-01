@@ -16,6 +16,21 @@ const getters = {
       .first();
 
     return data;
+  },
+  random_id: (state: any) => {
+    return Math.round(Math.random() * (10000 - 1) + 1);
+  },
+  getFirstExperience: (state: any) => (id: number) => {
+    return Experience.query()
+      .withAllRecursive(5)
+      .where("resume_id", id)
+      .first();
+  },
+  getLastExperience: (state: any) => (id: number) => {
+    return Experience.query()
+      .withAllRecursive(5)
+      .where("resume_id", id)
+      .last();
   }
 };
 
@@ -39,6 +54,9 @@ const actions = {
   addResume(state: any) {
     const resume_id = Math.round(Math.random() * (10000 - 1) + 1);
     state.commit("createResume", resume_id);
+  },
+  addExperience(state: any, payload: any) {
+    state.commit("createExperience", payload.resume_id);
   }
 };
 
@@ -87,6 +105,7 @@ const mutations = {
           {
             id: exp_id,
             resume_id,
+            company_name: "",
             title: {
               id: random_id(),
               experience_id: exp_id,
@@ -124,6 +143,25 @@ const mutations = {
             resume_id
           }
         ]
+      }
+    });
+  },
+  createExperience(state: any, resume_id: number) {
+    const exp_id = random_id();
+    Experience.insertOrUpdate({
+      data: {
+        id: exp_id,
+        resume_id,
+        title: {
+          id: random_id(),
+          experience_id: exp_id,
+          resume_id
+        },
+        branch: {
+          id: random_id(),
+          experience_id: exp_id,
+          resume_id
+        }
       }
     });
   },

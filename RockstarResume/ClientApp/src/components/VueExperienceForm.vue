@@ -1,12 +1,12 @@
  <template>
-  <b-modal id="vue-experience-modal" size="xl" title="Edit Resume" @ok="saveExperience()">
-    <b-container fluid>
+  <b-modal id="vue-experience-modal" size="xl" :title="modalTitle" @ok="saveExperience()">
+    <b-container fluid v-if="validExperience">
       <b-row class="my-2">
         <b-col sm="6">
           <b-form-input
             id="input-first-name"
-            :value="this.experience.companyName"
-            @input="e => { updateInput({companyName : e}) }"
+            :value="this.experience.company_name"
+            @input="e => { updateInput({company_name : e}) }"
             type="text"
             placeholder="Company name"
             required
@@ -51,8 +51,14 @@
           <vue-input-field
             :firstInput="this.experience.title.dutch_value"
             :secondInput="this.experience.title.english_value"
-            @firstInput="e => { updateInput({title:{english_value: this.experience.title.english_value, dutch_value : e}}) }"
-            @secondInput="e => { updateInput({title:{english_value : e, dutch_value :this.experience.title.dutch_value}}) }"
+            @firstInput="e => { updateDualInput({
+              id: this.experience.title.id,
+              english_value: this.experience.title.english_value,
+              dutch_value : e})}"
+            @secondInput="e => { updateDualInput({
+                id: this.experience.title.id,
+                english_value : e, 
+                dutch_value :this.experience.title.dutch_value})}"
             :removable="false"
           />
         </b-col>
@@ -69,8 +75,14 @@
           <vue-input-field
             :firstInput="this.experience.branch.dutch_value"
             :secondInput="this.experience.branch.english_value"
-            @firstInput="e => { updateInput({branch:{english_value: this.experience.branch.english_value, dutch_value : e}}) }"
-            @secondInput="e => { updateInput({branch:{english_value : e, dutch_value :this.experience.branch.dutch_value}}) }"
+            @firstInput="e => { updateDualInput({
+              id: this.experience.branch.id,
+              english_value: this.experience.branch.english_value,
+              dutch_value : e})}"
+            @secondInput="e => { updateDualInput({
+                id: this.experience.branch.id,
+                english_value : e, 
+                dutch_value :this.experience.branch.dutch_value})}"
             :removable="false"
           />
         </b-col>
@@ -92,40 +104,65 @@ export default {
   name: "vueExperienceForm",
   data() {
     return {
-      // experience: {
-      //   id: this.experienceid,
-      //   resume_id: this.id,
-      //   companyName: "",
-      //   city: "",
-      //   date_from: "",
-      //   date_to: "",
-      // }
+      experience: {
+        title: {
+          dutch_value: "",
+          english_value: "",
+        },
+        branch: {
+          dutch_value: "",
+          english_value: "",
+        }
+      }
     };
   },
   props: {
-    experience: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    experienceobject: {
       type: Object,
       required: true,
-
+    },
+    experienceid: {
+      type: Number,
+      required: true,
     },
   },
   computed: {
-    // experience: function () {
-    //   return Experience.query()
-    //     .where("resume_id", this.id)
-    //     .where('id', this.experienceid)
-    //     .first();
-    // },
+    validExperience: function () {
+      this.updateExperience();
+      return !(this.experience == null)
+    },
+    modalTitle: function () {
+      return "Edit Resume with id:" + this.getExpId();
+    }
   },
   methods: {
+    getExpId() {
+      return this.experienceid;
+    },
+    updateExperience() {
+      this.experience = Experience.query()
+        .whereId(this.experienceid)
+        .withAllRecursive(5)
+        .first();
+    },
     updateInput(data) {
       Experience.update({
         where: this.experience.id,
         data
       });
+      this.updateExperience();
+
+    },
+    updateDualInput(data) {
+      DualInputValue.update(data);
+      this.updateExperience();
     },
     saveExperience: function () {
-      Experience.update(this.experience)
+      // Experience.update(this.experience)
     }
   }
 };
