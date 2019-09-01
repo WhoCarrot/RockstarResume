@@ -30,7 +30,7 @@ export default class Experience extends Model {
   }
   
   get header() {
-    return `${this.companyName}` + " (" + `${this.city}` + ")";
+    return `${this.company_name}` + " (" + `${this.city}` + ")";
   }
 
   get period() {
@@ -40,6 +40,6 @@ export default class Experience extends Model {
       dateTo = `${ this.date_to }`;
     }
 
-    return `${this.date_from}` + " - " + `${this.date_to}`;
+    return `${this.date_from}` + " - " + dateTo;
   }
 }

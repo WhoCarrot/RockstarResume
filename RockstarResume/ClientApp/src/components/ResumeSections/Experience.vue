@@ -6,7 +6,9 @@
     <div v-for="experience in experienceList" :key="experience.id">
       <b-container class="experience-table my-4" fluid>
         <b-row>
-          <b-col sm="10">{{experience.header}} {{experience.id}}</b-col>
+          <b-col sm="10">
+            <b>{{experienceHeader(experience)}}</b>
+          </b-col>
           <b-col sm="2">
             <vue-icon-button icon="edit" @click="editExperience(experience.id)" />
           </b-col>
@@ -17,11 +19,11 @@
         </b-row>
         <b-row>
           <b-col sm="4">Branch</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
+          <b-col sm="8">{{experience.branch.english_value}}</b-col>
         </b-row>
         <b-row>
           <b-col sm="4">Title</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
+          <b-col sm="8">{{experience.title.english_value}}</b-col>
         </b-row>
         <b-row>
           <b-col sm="4">Programming languages</b-col>
@@ -44,7 +46,7 @@
     <vue-button text="Add experience" @click="createExperience" />
     <vue-experience-form
       :id="Number(this.Id)"
-      :experienceobject="experience"
+      :experience="experience"
       :experienceid="this.experience_id"
     />
   </b-container>
@@ -85,34 +87,26 @@ export default {
         .where("resume_id", this.Id)
         .where("id", this.experience_id)
         .first();
-
-      //Experience.find(this.experience_id);
     },
     validExperience() {
       return this.experience_id > -1;
     }
   },
   methods: {
+    experienceHeader(experience) {
+      return experience.company_name + " (" + experience.city + ")";
+    },
     createExperience() {
       dispatch("resume/addExperience", { resume_id: this.Id });
       let lastId = this.$store.getters['resume/getLastExperience'](this.Id).id
-      this.setupExperience(lastId);
+      this.experience_id = lastId;
+      this.showModal(true);
     },
     editExperience(experience_id) {
-      this.setupExperience(experience_id);
-    },
-    setupExperience(experience_id) {
-
-      // Fix to prevent having to click twice to open the experience form for the first time. 
       this.experience_id = experience_id;
-      console.log("Start");
-      var x = this;
-
-      setTimeout(function () {
-        x.showModal(true);
-        console.log("Stop");
-      }, 100);
+      this.showModal(true);
     },
+
     showModal(show) {
       if (show) {
         this.$bvModal.show("vue-experience-modal")

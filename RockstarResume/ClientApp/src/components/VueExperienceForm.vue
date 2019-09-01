@@ -104,16 +104,6 @@ export default {
   name: "vueExperienceForm",
   data() {
     return {
-      experience: {
-        title: {
-          dutch_value: "",
-          english_value: "",
-        },
-        branch: {
-          dutch_value: "",
-          english_value: "",
-        }
-      }
     };
   },
   props: {
@@ -121,7 +111,7 @@ export default {
       type: Number,
       required: true,
     },
-    experienceobject: {
+    experience: {
       type: Object,
       required: true,
     },
@@ -132,7 +122,6 @@ export default {
   },
   computed: {
     validExperience: function () {
-      this.updateExperience();
       return !(this.experience == null)
     },
     modalTitle: function () {
@@ -143,23 +132,14 @@ export default {
     getExpId() {
       return this.experienceid;
     },
-    updateExperience() {
-      this.experience = Experience.query()
-        .whereId(this.experienceid)
-        .withAllRecursive(5)
-        .first();
-    },
     updateInput(data) {
       Experience.update({
         where: this.experience.id,
         data
       });
-      this.updateExperience();
-
     },
     updateDualInput(data) {
       DualInputValue.update(data);
-      this.updateExperience();
     },
     saveExperience: function () {
       // Experience.update(this.experience)

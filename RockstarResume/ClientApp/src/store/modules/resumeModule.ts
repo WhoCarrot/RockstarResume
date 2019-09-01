@@ -105,7 +105,10 @@ const mutations = {
           {
             id: exp_id,
             resume_id,
-            company_name: "",
+            company_name: "Team Rockstars IT",
+            city: "Den Bosch",
+            date_from: "03-2012",
+            date_to: "11-2019",
             title: {
               id: random_id(),
               experience_id: exp_id,
