@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RockstarResume.Model;
-using RockstarResume.Model.RockstarProperties;
 
 namespace RockstarResume.DAL
 {

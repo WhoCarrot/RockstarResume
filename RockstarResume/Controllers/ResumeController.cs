@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RockstarResume.Model;
-using RockstarResume.Model.DTOs;
 using RockstarResume.Services;
 
 namespace RockstarResume.App.Controllers
