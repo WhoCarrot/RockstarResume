@@ -4,24 +4,24 @@
       <p>{{Id}}</p>
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Profile" active>
-            <Profile :Id="Id" />
+          <b-tab title="Profile">
+            <Profile :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Introduction">
-            <introduction/>
+            <introduction :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Skills">
-            <b-card-text>Tab Contents 2</b-card-text>
+            <skills :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Experience">
-            <b-card-text>Tab Contents 2</b-card-text>
+          <b-tab title="Experience" active>
+            <experience :Id="Number(Id)"/>
           </b-tab>
-          <b-tab title="Extra">
-            <b-card-text>Tab Contents 2</b-card-text>
+          <b-tab title="Extra" >
+            <!-- <extra :Id="Number(Id)" /> -->
           </b-tab>
           <b-tab title="Data">
             <b-card-text>
-              <p>Data: </p>
+              <p>Data:</p>
               <pre>{{resumeData}}</pre>
             </b-card-text>
           </b-tab>
@@ -34,16 +34,22 @@
 <script>
 import Profile from "@/components/ResumeSections/Profile.vue";
 import Introduction from "@/components/ResumeSections/Introduction.vue";
+import Skills from "@/components/ResumeSections/Skills.vue";
+import Extra from "@/components/ResumeSections/Extra.vue";
+import Experience from "@/components/ResumeSections/Experience.vue";
 
 import Resume from "@/assets/ts/class/resume";
 import { get, sync } from "vuex-pathify";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "",
+  name: "resume",
   components: {
     Profile,
-    Introduction
+    Introduction,
+    Skills,
+    Experience,
+    Extra
   },
   data() {
     return {
@@ -59,10 +65,6 @@ export default {
   methods: {
     ...mapActions("resume", ["requestResumeList", "createResume"])
   },
-
-  beforeMount() {
-    this.$store.dispatch("resume/requestResumeList");
-  }
 };
 </script>
 
