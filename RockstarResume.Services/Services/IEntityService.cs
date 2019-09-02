@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace RockstarResume.Services
 {
     public interface IEntityService<TEntity>
     {
-        IEnumerable<TEntity> Get();
+        IQueryable<TEntity> Get();
         TEntity Get(int id);
         TEntity Update(TEntity entity);
         TEntity Create(TEntity entity);

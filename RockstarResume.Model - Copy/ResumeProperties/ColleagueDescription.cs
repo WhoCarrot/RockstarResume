@@ -2,5 +2,6 @@
 {
     public class ColleagueDescription : ResumeProperty
     {
+        public string Description { get; set; }
     }
 }

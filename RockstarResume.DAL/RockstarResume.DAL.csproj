@@ -17,8 +17,4 @@
     <ProjectReference Include="..\RockstarResume.Model\RockstarResume.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntityFramework\Migrations\" />
-  </ItemGroup>
-
 </Project>
