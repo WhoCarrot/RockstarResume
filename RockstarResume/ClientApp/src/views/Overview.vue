@@ -8,11 +8,7 @@
     </b-list-group>
 
     <div class="col text-center">
-      <b-button
-        variant="outline-primary"
-        class="mx-auto my-1"
-        v-on:click="addResume()"
-      >Add Resume</b-button>
+      <b-button variant="outline-primary" class="mx-auto my-1" v-on:click="addResume()">Add Resume</b-button>
     </div>
   </b-container>
 </template>
@@ -26,7 +22,7 @@ export default {
   components: {},
   data() {
     return {
-      
+
     };
   },
   computed: {
@@ -39,6 +35,9 @@ export default {
     addResume() {
       this.$store.dispatch("resume/addResume");
     }
+  },
+  created() {
+    this.$store.dispatch("resume/setupResumeData");
   },
 };
 </script>

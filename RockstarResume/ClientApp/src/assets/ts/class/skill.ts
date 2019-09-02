@@ -7,8 +7,8 @@ export default class Skill extends Model {
 
   static fields() {
     return {
-      id: this.attr(null),
-      name: this.attr(""),
+      id: this.increment(),
+      text: this.attr(""),
       category: this.attr(""),
     };
   }
