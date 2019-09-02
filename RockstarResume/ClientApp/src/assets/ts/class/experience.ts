@@ -2,6 +2,8 @@ import { Model } from "@vuex-orm/core";
 import Skill from './skill';
 import ExperienceTitle from './inputvalue/experienceTitle';
 import ExperienceBranch from './inputvalue/experienceBranch';
+import ExperienceWorkDescription from './inputvalue/experienceWorkDescription';
+import ExperienceWorkActivities from './inputvalue/experienceWorkActivities';
 
 "use strict";
 
@@ -29,6 +31,8 @@ export default class Experience extends Model {
       programming_frameworks_ids: this.attr([]),
       programming_frameworks: this.hasManyBy(Skill, "programming_frameworks_ids"),
 
+      work_description: this.hasOne(ExperienceWorkDescription, "experience_id"),
+      work_activities: this.hasMany(ExperienceWorkActivities, "experience_id"),
     };
   }
   

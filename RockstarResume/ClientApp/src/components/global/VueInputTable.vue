@@ -30,7 +30,7 @@
 <script>
 
 export default {
-  name: "inputTable",
+  name: "vue-input-table",
   data() {
     return {
     };
@@ -38,6 +38,10 @@ export default {
   props: {
     id: {
       type: Number
+    },
+    experienceid: {
+      type: Number,
+      default: -1
     },
     header: {
       type: String,
@@ -65,9 +69,18 @@ export default {
   },
   computed: {
     itemList: function () {
-      return this.classmodal.query()
-        .where("resume_id", this.id)
-        .get();
+      if (this.experienceid === -1) {
+        return this.classmodal.query()
+          .where("resume_id", this.id)
+          .get();
+      } else {
+        // Extra check for Experience nested VueinputTable
+        return this.classmodal.query()
+          .where((x) => {
+            return x.resume_id === this.id
+              && x.experience_id === this.experienceid
+          }).get();
+      }
     },
     itemListLength: function () {
       return this.itemList.length;
@@ -75,21 +88,41 @@ export default {
   },
   methods: {
     addRow: function () {
-      this.classmodal.insert({
-        data: {
-          resume_id: this.id,
-        }
-      });
-      // this.$store.dispatch("resume/addDualInputValue", {
-      // resume_id: this.id,
-      // type: this.type
-      // });
+      if (this.experienceid === -1) {
+        this.classmodal.insert({
+          data: {
+            resume_id: this.id,
+          }
+        });
+      } else {
+        // Extra check for Experience nested VueinputTable
+        this.classmodal.insert({
+          data: {
+            resume_id: this.id,
+            experience_id: this.experienceid
+          }
+        });
+      }
+
+
     },
     updateRow(row, data) {
-      this.classmodal.update({
-        where: row.id,
-        data
-      });
+      if (this.experienceid === -1) {
+        this.classmodal.update({
+          where: row.id,
+          data
+        });
+      } else {
+        // Extra check for Experience nested VueinputTable
+        this.classmodal.update({
+          where: (x) => {
+            return x.resume_id === this.id
+              && x.experience_id === this.experienceid
+              && x.id === row.id
+          }, data
+        });
+      }
+
     },
     removeRow: function (index) {
       if (this.itemListLength > 1) {

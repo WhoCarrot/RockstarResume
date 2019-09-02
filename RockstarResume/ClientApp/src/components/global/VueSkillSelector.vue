@@ -9,6 +9,8 @@
         :autocomplete-items="filteredItems"
         :add-only-from-autocomplete="true"
         :add-on-key="[13, 9, ':', ';']"
+        :autocomplete-min-length="0"
+        :add-from-paste="false"
       />
     </b-col>
   </b-row>
@@ -50,8 +52,6 @@ export default {
   },
   methods: {
     updateTags(newTags) {
-      console.log(newTags);
-
       this.$emit('tagsUpdate', newTags)
     }
   },

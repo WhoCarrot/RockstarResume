@@ -20,7 +20,8 @@ import Interests from "@/assets/ts/class/inputvalue/interests";
 import Certificate from "@/assets/ts/class/inputvalue/certificate";
 import ExperienceTitle from "@/assets/ts/class/inputvalue/experienceTitle";
 import ExperienceBranch from "@/assets/ts/class/inputvalue/experienceBranch";
-
+import ExperienceWorkDescription from "@/assets/ts/class/inputvalue/experienceWorkDescription";
+import ExperienceWorkActivities from "@/assets/ts/class/inputvalue/experienceWorkActivities";
 // Create a new database instance.
 const database = new VuexORM.Database();
 
@@ -45,5 +46,7 @@ database.register(Interests);
 database.register(Certificate);
 database.register(ExperienceTitle);
 database.register(ExperienceBranch);
+database.register(ExperienceWorkDescription);
+database.register(ExperienceWorkActivities);
 
 export { VuexORM, database };

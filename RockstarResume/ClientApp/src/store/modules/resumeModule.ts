@@ -137,7 +137,17 @@ const mutations = {
               resume_id
             },
             programming_languages_ids: [5, 90, 45],
-            programming_frameworks_ids: []
+            programming_frameworks_ids: [],
+            work_description: {
+              id: random_id(),
+              experience_id: exp_id,
+              resume_id
+            },
+            work_activities: [{
+              id: random_id(),
+              experience_id: exp_id,
+              resume_id
+            }]
           }
         ],
         // Extra
@@ -183,7 +193,19 @@ const mutations = {
           id: random_id(),
           experience_id: exp_id,
           resume_id
-        }
+        },
+        programming_languages_ids: [],
+        programming_frameworks_ids: [],
+        work_description: {
+          id: random_id(),
+          experience_id: exp_id,
+          resume_id
+        },
+        work_activities: [{
+          id: random_id(),
+          experience_id: exp_id,
+          resume_id
+        }]
       }
     });
   },
