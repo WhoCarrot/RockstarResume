@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RockstarResume.DAL;
+using RockstarResume.Logic.Services;
 using RockstarResume.Services;
 using VueCliMiddleware;
 
@@ -32,8 +33,8 @@ namespace RockstarResume.App
             services.AddScoped<AccountManagerService, AccountManagerService>();
             services.AddScoped<RockstarService, RockstarService>();
             services.AddScoped<ResumeService, ResumeService>();
-
-            // In production, the React files will be served from this directory
+            services.AddScoped<ExportService, ExportService>();
+            
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";

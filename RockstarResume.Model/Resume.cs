@@ -10,11 +10,11 @@ namespace RockstarResume.Model
         public AccountManager AccountManager { get; set; }
         public Rockstar Rockstar { get; set; }
         public Language Language { get; set; }
-        public ICollection<RockstarProperty> Properties { get; set; }
+        //public ICollection<RockstarProperty> Properties { get; set; }
 
         public Resume()
         {
-            Properties = new HashSet<RockstarProperty>();
+            //Properties = new HashSet<RockstarProperty>();
         }
     }
 }
