@@ -17,28 +17,40 @@ namespace RockstarResume.Logic.Services
         /// </summary>
         /// <param name="resume"></param>
         /// <returns></returns>
-        public byte[] ExportDocx(Resume resume)
+        public MemoryStream ExportDocx(Resume resume)
         {
-            using (var memoryStream = new MemoryStream())
+            var memoryStream = new MemoryStream();
+            using (var document = WordprocessingDocument.Create(memoryStream, WordprocessingDocumentType.Document, true))
             {
-                using (var document = WordprocessingDocument.Create(memoryStream, WordprocessingDocumentType.Document, true))
-                {
-                    var mainPart = document.AddMainDocumentPart();
-                    
-                    mainPart.Document = new Document();
-                    var documentBody = new Body();
+                //var mainPart = document.AddMainDocumentPart();
 
-                    var paragraph = new Paragraph();
-                    var run = new Run();;
-                    var text = new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!");
+                //mainPart.Document = new Document();
+                //var body = mainPart.Document.AppendChild(new Body());
+                //var para = body.AppendChild(new Paragraph());
+                //var run = para.AppendChild(new Run());
+                //run.AppendChild(new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!"));
 
-                    run.AppendChild(text);
-                    paragraph.AppendChild(run);
-                    documentBody.AppendChild(paragraph);
-                }
 
-                return memoryStream.ToArray();
+                var mainPart = document.AddMainDocumentPart();
+
+                mainPart.Document = new Document(
+                    new Body(
+                        new Paragraph(
+                            new Run(
+                                new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!")))));
+                //    }
+                //mainPart.Document = new Document();
+                //var documentBody = new Body();
+
+                //var paragraph = documentBody.AppendChild(new Paragraph());
+                //var run = paragraph.AppendChild(new Run());
+                //run.AppendChild(new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!"));
             }
+
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return memoryStream;
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RockstarResume.Model;
 
 namespace RockstarResume.DAL.EntityFramework
@@ -12,7 +13,7 @@ namespace RockstarResume.DAL.EntityFramework
             _context = context;
         }
 
-        public IEnumerable<TEntity> Get()
+        public IQueryable<TEntity> Get()
         {
             return _context.Set<TEntity>();
         }

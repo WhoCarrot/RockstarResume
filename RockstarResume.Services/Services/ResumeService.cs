@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RockstarResume.DAL;
 using RockstarResume.Model;
 
@@ -13,7 +14,7 @@ namespace RockstarResume.Services
             _resumeRepository = resumeRepository;
         }
 
-        public IEnumerable<Resume> Get() => _resumeRepository.Get();
+        public IQueryable<Resume> Get() => _resumeRepository.Get();
         public Resume Get(int id) => _resumeRepository.Get(id);
         public Resume Update(Resume resume) => _resumeRepository.Update(resume);
         public Resume Create(Resume resume) => _resumeRepository.Create(resume);

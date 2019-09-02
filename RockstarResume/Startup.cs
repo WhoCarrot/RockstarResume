@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RockstarResume.DAL;
+using RockstarResume.DAL.EntityFramework;
 using RockstarResume.Logic.Services;
 using RockstarResume.Services;
 using VueCliMiddleware;
@@ -34,7 +35,8 @@ namespace RockstarResume.App
             services.AddScoped<RockstarService, RockstarService>();
             services.AddScoped<ResumeService, ResumeService>();
             services.AddScoped<ExportService, ExportService>();
-            
+            services.AddScoped(typeof(IRepository<>), typeof(EntityFrameworkRepository<>));
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -66,15 +68,15 @@ namespace RockstarResume.App
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseVueCli("serve");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseVueCli("serve");
+            //    }
+            //});
         }
     }
 }

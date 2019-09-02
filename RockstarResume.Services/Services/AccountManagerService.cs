@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RockstarResume.DAL;
 using RockstarResume.Model;
 
@@ -13,7 +14,7 @@ namespace RockstarResume.Services
             _accountManagerRepository = accountManagerRepository;
         }
 
-        public IEnumerable<AccountManager> Get() => _accountManagerRepository.Get();
+        public IQueryable<AccountManager> Get() => _accountManagerRepository.Get();
 
         public AccountManager Get(int id) => _accountManagerRepository.Get(id);
 
