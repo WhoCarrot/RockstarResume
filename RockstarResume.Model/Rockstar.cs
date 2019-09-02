@@ -1,14 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using RockstarResume.Model.RockstarProperties;
+using System.Collections.Generic;
+using RockstarResume.Model.Types;
 
 namespace RockstarResume.Model
 {
-    public class Rockstar : User
+    public class Rockstar : Person
     {
-        public ICollection<AccountManager> AccountManagers { get; set; }
+        public ICollection<RockstarProperty> Properties { get; set; }
+        public string PictureUrl { get; set; }
+        public string Nationality { get; set; }
+        public bool DriversLicense { get; set; }
+        public DateTime Birthday { get; set; }
+        public Region Region { get; set; }
 
         public Rockstar()
         {
-            AccountManagers = new HashSet<AccountManager>();
+            Properties = new HashSet<RockstarProperty>();
         }
     }
 }

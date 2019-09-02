@@ -1,19 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using RockstarResume.Model.RockstarProperties;
+using RockstarResume.Model.Types;
 
 namespace RockstarResume.Model
 {
     public class Resume : BaseEntity
     {
-        /// <summary>
-        /// Two-lettered language code according to ISO 639-2 standard (https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes)
-        /// </summary>
-        public string Language { get; set; }
-
-        public ICollection<ResumeProperty> ResumeProperties { get; set; }
+        public AccountManager AccountManager { get; set; }
+        public Rockstar Rockstar { get; set; }
+        public Language Language { get; set; }
+        public ICollection<RockstarProperty> Properties { get; set; }
 
         public Resume()
         {
-            ResumeProperties = new HashSet<ResumeProperty>();
+            Properties = new HashSet<RockstarProperty>();
         }
     }
 }

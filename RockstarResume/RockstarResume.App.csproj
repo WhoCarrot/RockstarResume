@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RockstarResume.Model\RockstarResume.Model.csproj" />
-    <ProjectReference Include="..\RockstarResume.Services\RockstarResume.Services.csproj" />
+    <ProjectReference Include="..\RockstarResume.Services\RockstarResume.Logic.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
