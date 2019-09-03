@@ -152,13 +152,31 @@ const mutations = {
             work_description: {
               id: random_id(),
               experience_id: exp_id,
-              resume_id
+              resume_id,
+              english_value:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed leo cursus libero auctor iaculis nec et risus. Integer dictum eros et purus feugiat bibendum. Ut faucibus sem in elit malesuada, in scelerisque urna aliquam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce dapibus iaculis sapien in sollicitudin. Pellentesque lobortis lorem maximus ipsum sollicitudin, et sagittis velit mollis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce sit amet dignissim mi. Aliquam a est in mi porta blandit. Nam quis auctor velit. Suspendisse lobortis ullamcorper eros sit amet pharetra. "
             },
             work_activities: [
               {
                 id: random_id(),
                 experience_id: exp_id,
-                resume_id
+                resume_id,
+                english_value:
+                  "Nullam efficitur nisl dictum, porta sem quis, vestibulum tortor. Sed pulvinar orci eget ipsum pellentesque mollis. Nam pellentesque ex eu porta scelerisque."
+              },
+              {
+                id: random_id(),
+                experience_id: exp_id,
+                resume_id,
+                english_value:
+                  "Nullam efficitur nisl dictum, porta sem quis, vestibulum tortor. Sed pulvinar orci eget ipsum pellentesque mollis. Nam pellentesque ex eu porta scelerisque."
+              },
+              {
+                id: random_id(),
+                experience_id: exp_id,
+                resume_id,
+                english_value:
+                  "Nullam efficitur nisl dictum, porta sem quis, vestibulum tortor. Sed pulvinar orci eget ipsum pellentesque mollis. Nam pellentesque ex eu porta scelerisque."
               }
             ]
           }

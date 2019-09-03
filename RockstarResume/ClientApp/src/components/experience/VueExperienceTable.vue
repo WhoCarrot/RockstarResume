@@ -30,11 +30,24 @@
     </b-row>
     <b-row>
       <b-col sm="4">Opererating Systems</b-col>
-      <b-col sm="8">{{experience.period}}</b-col>
+      <b-col sm="8">{{operatingSystems}}</b-col>
     </b-row>
     <b-row>
       <b-col sm="4">Database</b-col>
-      <b-col sm="8">{{experience.period}}</b-col>
+      <b-col sm="8">{{databases}}</b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <p class="mt-3">{{experience.work_description.english_value}}</p>
+        <br />
+        <ul
+          class="my-2"
+          v-for="work_activity in experience.work_activities"
+          :key="work_activity.id"
+        >
+          <li v-if="work_activity.english_value">{{work_activity.english_value}}</li>
+        </ul>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -53,23 +66,35 @@ export default {
       return this.experience.resume_id
     },
     programmingLanguages() {
-      return this.arrayToString("programming_languages", this.experience.programming_languages)
+      return this.arrayToString(this.experience.programming_languages)
     },
     programmingFrameworks() {
-      return this.arrayToString("programming_frameworks", this.experience.programming_frameworks)
+      return this.arrayToString(this.experience.programming_frameworks)
+    },
+    databases() {
+      return this.arrayToString(this.experience.programming_databases)
+    },
+    operatingSystems() {
+      return this.arrayToString(this.experience.programming_operating_systems)
     }
-
   },
   methods: {
     experienceHeader(experience) {
-      return this.experience.company_name + " (" + this.experience.city + ")";
+      let header = "";
+      if (this.experience.company_name) {
+        header += this.experience.company_name
+      }
+      if (this.experience.city) {
+        header += " (" + this.experience.city + ")";
+      }
+      return header;
     },
-    arrayToString(prop, array) {
+    arrayToString(array) {
 
-      if (this.experience[prop].length > 0) {
+      if (array && array.length > 0) {
         var arr = []
         // Filter to only the text
-        this.experience[prop].forEach(element => {
+        array.forEach(element => {
           arr.push(element.text)
         });
 
