@@ -31,6 +31,14 @@ namespace RockstarResume.App
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
             services.AddScoped<AccountManagerService, AccountManagerService>();
             services.AddScoped<RockstarService, RockstarService>();
             services.AddScoped<ResumeService, ResumeService>();
@@ -60,6 +68,8 @@ namespace RockstarResume.App
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseCors("CorsPolicy");
 
             app.UseMvc(routes =>
             {

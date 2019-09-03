@@ -17,6 +17,7 @@ namespace RockstarResume.App.Controllers
             _resumeService = resumeService;
         }
 
+        [HttpGet]
         public IActionResult Get()
         {
             var resumes = _resumeService.Get();
@@ -24,32 +25,45 @@ namespace RockstarResume.App.Controllers
             return Ok(resumeDTOs);
         }
 
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var resume = _resumeService.Get(id);
+            if (resume == null) return NotFound();
             var resumeDTO = new ResumeDTO(resume);
             return Ok(resumeDTO);
         }
 
-        public IActionResult Post(Resume resume)
+        [HttpPost]
+        public IActionResult Post([FromBody] Resume resume)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var createdResume = _resumeService.Create(resume);
             if (createdResume == null) return BadRequest();
             var createdResumeDTO = new ResumeDTO(createdResume);
             return Ok(createdResumeDTO);
         }
 
-        public IActionResult Put(Resume resume)
+        [HttpPut]
+        public IActionResult Put([FromBody] Resume resume)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var updatedResume = _resumeService.Update(resume);
             if (updatedResume == null) return NotFound();
             var updatedResumeDTO = new ResumeDTO(updatedResume);
             return Ok(updatedResumeDTO);
         }
 
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _resumeService.Delete(id);
+            return Ok();
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
             return Ok();
         }
     }

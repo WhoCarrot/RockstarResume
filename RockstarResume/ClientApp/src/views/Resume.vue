@@ -18,6 +18,7 @@
       </b-tab>
       <b-tab title="Data">
         <b-card-text>
+          <vue-button text="Export to docx" @click="exportToDocx" />
           <p>Data:</p>
           <pre>{{resumeData}}</pre>
         </b-card-text>
