@@ -1,3 +1,11 @@
 module.exports = {
-  assetsDir: 'assets'
+  assetsDir: 'assets',
+
+  css: {
+    loaderOptions: {
+      sass: {
+        data: '@import "@/scss/settings.scss";'
+      }
+    }
+  }
 }

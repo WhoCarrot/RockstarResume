@@ -1,8 +1,5 @@
 <template>
   <b-container>
-    <b-row>
-      <b-col>Current experience Id: {{this.experience_id}}</b-col>
-    </b-row>
     <div v-for="experience in experienceList" :key="experience.id">
       <vue-experience-table :experience="experience" @edit="id => { editExperience(id)}" />
     </div>

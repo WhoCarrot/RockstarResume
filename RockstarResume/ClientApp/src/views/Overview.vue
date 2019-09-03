@@ -2,7 +2,7 @@
   <b-container fluid class="overview">
     <b-list-group>
       <b-list-group-item v-for="(resume, key) in getResumeList" :key="key">
-        <b-link :to="{ name: 'Resume', params: { Id: resume.id }}">{{ resume.id }}</b-link>
+        <b-link :to="{ name: 'Resume', params: { Id: resume.id }}">{{ resume.resume_title }}</b-link>
         <!-- <router-link :to="{ name: 'Resume', params: { Id: resume.Id }}">{{ resume.Id}}</router-link> -->
       </b-list-group-item>
     </b-list-group>

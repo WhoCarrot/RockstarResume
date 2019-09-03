@@ -99,6 +99,8 @@ const mutations = {
       data: {
         id: resume_id,
         // Introduction page
+        resume_title: "Test Resume with ID: " + resume_id,
+
         qualities: [
           {
             resume_id,
