@@ -4,44 +4,7 @@
       <b-col>Current experience Id: {{this.experience_id}}</b-col>
     </b-row>
     <div v-for="experience in experienceList" :key="experience.id">
-      <b-container class="experience-table my-4" fluid>
-        <b-row>
-          <b-col sm="10">
-            <b>{{experienceHeader(experience)}}</b>
-          </b-col>
-          <b-col sm="2">
-            <vue-icon-button icon="edit" @click="editExperience(experience.id)" />
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Period</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Branch</b-col>
-          <b-col sm="8">{{experience.branch.english_value}}</b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Title</b-col>
-          <b-col sm="8">{{experience.title.english_value}}</b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Programming languages</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Technologies used</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Opererating Systems</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="4">Database</b-col>
-          <b-col sm="8">{{experience.period}}</b-col>
-        </b-row>
-      </b-container>
+      <vue-experience-table :experience="experience" @edit="id => { editExperience(id)}" />
     </div>
     <vue-button text="Add experience" @click="createExperience" />
     <vue-experience-form
@@ -53,7 +16,8 @@
 </template>
 
 <script>
-import VueExperienceForm from "@/components/VueExperienceForm.vue";
+import VueExperienceTable from "@/components/experience/VueExperienceTable.vue";
+import VueExperienceForm from "@/components/experience/VueExperienceForm.vue";
 import Resume from "@/assets/ts/class/resume";
 import Experience from "@/assets/ts/class/experience";
 import { get, sync, dispatch } from "vuex-pathify";
@@ -72,6 +36,7 @@ export default {
     }
   },
   components: {
+    VueExperienceTable,
     VueExperienceForm
   },
   computed: {
@@ -93,9 +58,7 @@ export default {
     }
   },
   methods: {
-    experienceHeader(experience) {
-      return experience.company_name + " (" + experience.city + ")";
-    },
+
     createExperience() {
       dispatch("resume/addExperience", { resume_id: this.Id });
       let lastId = this.$store.getters['resume/getLastExperience'](this.Id).id
@@ -127,12 +90,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.experience-table {
-  div {
-    div {
-      border: 1px solid #287c89;
-    }
-  }
-}
-</style>

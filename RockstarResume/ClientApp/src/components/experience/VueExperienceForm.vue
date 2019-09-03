@@ -2,7 +2,7 @@
   <b-modal id="vue-experience-modal" size="xl" :title="modalTitle" @ok="saveExperience()">
     <b-container fluid v-if="validExperience">
       <b-tabs card>
-        <b-tab title="Experience">
+        <b-tab title="Experience" active>
           <!-- Company info -->
           <b-row class="mt-2">
             <b-col>
@@ -127,17 +127,17 @@
             <b-col>
               <vue-skill-selector
                 title="Databases"
-                :autocompletelist="getProgrammingLanguagesOptions"
-                :tags="this.experience.programming_languages"
-                @tagsUpdate="newTags => this.updateExperienceSkills('programming_languages_ids',newTags)"
+                :autocompletelist="getDatabaseOptions"
+                :tags="this.experience.programming_databases"
+                @tagsUpdate="newTags => this.updateExperienceSkills('programming_databases_ids',newTags)"
               />
             </b-col>
             <b-col>
               <vue-skill-selector
                 title="Operating systems"
-                :autocompletelist="getProgrammingLanguagesOptions"
-                :tags="this.experience.programming_languages"
-                @tagsUpdate="newTags => this.updateExperienceSkills('programming_languages_ids',newTags)"
+                :autocompletelist="getOperatingSystemsOptions"
+                :tags="this.experience.programming_operating_systems"
+                @tagsUpdate="newTags => this.updateExperienceSkills('programming_operating_systems_ids',newTags)"
               />
             </b-col>
           </b-row>
@@ -215,6 +215,12 @@ export default {
     },
     getProgrammingFrameworksOptions() {
       return Skill.query().where("category", "programming_frameworks").get()
+    },
+    getOperatingSystemsOptions() {
+      return Skill.query().where("category", "OS").get()
+    },
+    getDatabaseOptions() {
+      return Skill.query().where("category", "DB").get()
     },
     experienceWorkDescriptionValue: function () {
       return ExperienceWorkDescription;

@@ -31,6 +31,13 @@ export default class Experience extends Model {
       programming_frameworks_ids: this.attr([]),
       programming_frameworks: this.hasManyBy(Skill, "programming_frameworks_ids"),
 
+      programming_databases_ids: this.attr([]),
+      programming_databases: this.hasManyBy(Skill, "programming_databases_ids"),
+
+      programming_operating_systems_ids: this.attr([]),
+      programming_operating_systems: this.hasManyBy(Skill, "programming_operating_systems_ids"),
+
+
       work_description: this.hasOne(ExperienceWorkDescription, "experience_id"),
       work_activities: this.hasMany(ExperienceWorkActivities, "experience_id"),
     };

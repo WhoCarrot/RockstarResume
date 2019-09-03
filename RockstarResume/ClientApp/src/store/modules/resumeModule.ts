@@ -6,6 +6,8 @@ import Experience from "@/assets/ts/class/experience";
 import Skills from "@/assets/ts/class/skill";
 import SkillsProgrammingLanguages from "@/assets/ts/data/skills.programminglanguages";
 import SkillsProgrammingTools from "@/assets/ts/data/skills.programmingtools";
+import SkillsDatabases from '@/assets/ts/data/skills.databases';
+import SkillsOperatingsystems from '@/assets/ts/data/skills.operatingsystems';
 
 // initial state
 const state = {};
@@ -77,6 +79,14 @@ const mutations = {
     Skills.insertOrUpdate({
       data: SkillsProgrammingTools
     });
+
+    Skills.insertOrUpdate({
+      data: SkillsDatabases
+    });
+
+    Skills.insertOrUpdate({
+      data: SkillsOperatingsystems
+    });
   },
 
   setResumeList(state: any, resumeList: Resume[]) {
@@ -138,6 +148,7 @@ const mutations = {
             },
             programming_languages_ids: [5, 90, 45],
             programming_frameworks_ids: [],
+            programming_operating_systems_ids: [],
             work_description: {
               id: random_id(),
               experience_id: exp_id,
@@ -196,6 +207,7 @@ const mutations = {
         },
         programming_languages_ids: [],
         programming_frameworks_ids: [],
+        programming_operating_systems: [],
         work_description: {
           id: random_id(),
           experience_id: exp_id,
