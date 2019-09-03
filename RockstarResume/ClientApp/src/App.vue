@@ -1,12 +1,12 @@
 <template>
-  <div id="app">
+  <b-container id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link>
     </div>
-    <router-view/>
-  </div>
+    <router-view />
+  </b-container>
 </template>
 
 <style lang="scss">
-  @import '@/scss/base.scss';
+@import "@/scss/base.scss";
 </style>

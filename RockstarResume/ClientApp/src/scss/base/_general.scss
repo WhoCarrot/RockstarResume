@@ -1,3 +1,11 @@
+body {
+  background: url("~@/assets/img/background-header.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 2218px 138px;
+  background-attachment: scroll;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -5,12 +13,16 @@
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  height: 28px;
+  margin: 61px 30px;
+  padding: 0px 0px 0px 25px;
+  background: #F5D700;
   a {
     font-weight: bold;
     color: #2c3e50;
+    font-size: 19px;
     &.router-link-exact-active {
-      color: #42b983;
+      color: black;
     }
   }
 }

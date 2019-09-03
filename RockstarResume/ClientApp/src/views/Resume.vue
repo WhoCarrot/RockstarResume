@@ -1,33 +1,28 @@
 <template>
   <b-container class="resume">
-    <div>
-      <p>{{Id}}</p>
-      <b-card no-body>
-        <b-tabs card>
-          <b-tab title="Profile" active>
-            <Profile :Id="Number(Id)" />
-          </b-tab>
-          <b-tab title="Introduction">
-            <introduction :Id="Number(Id)" />
-          </b-tab>
-          <b-tab title="Skills">
-            <skills :Id="Number(Id)" />
-          </b-tab>
-          <b-tab title="Experience">
-            <experience :Id="Number(Id)" />
-          </b-tab>
-          <b-tab title="Extra">
-            <extra :Id="Number(Id)" />
-          </b-tab>
-          <b-tab title="Data">
-            <b-card-text>
-              <p>Data:</p>
-              <pre>{{resumeData}}</pre>
-            </b-card-text>
-          </b-tab>
-        </b-tabs>
-      </b-card>
-    </div>
+    <b-tabs card>
+      <b-tab title="Profile" active>
+        <Profile :Id="Number(Id)" />
+      </b-tab>
+      <b-tab title="Introduction">
+        <introduction :Id="Number(Id)" />
+      </b-tab>
+      <b-tab title="Skills">
+        <skills :Id="Number(Id)" />
+      </b-tab>
+      <b-tab title="Experience">
+        <experience :Id="Number(Id)" />
+      </b-tab>
+      <b-tab title="Extra">
+        <extra :Id="Number(Id)" />
+      </b-tab>
+      <b-tab title="Data">
+        <b-card-text>
+          <p>Data:</p>
+          <pre>{{resumeData}}</pre>
+        </b-card-text>
+      </b-tab>
+    </b-tabs>
   </b-container>
 </template>
 
