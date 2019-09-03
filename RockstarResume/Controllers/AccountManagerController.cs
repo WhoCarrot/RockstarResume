@@ -17,6 +17,7 @@ namespace RockstarResume.App.Controllers
             _accountManagerService = accountManagerService;
         }
 
+        [HttpGet]
         public IActionResult Get()
         {
             var accountManagers = _accountManagerService.Get();
@@ -24,32 +25,45 @@ namespace RockstarResume.App.Controllers
             return Ok(accountManagerDTOs);
         }
 
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var accountManager = _accountManagerService.Get(id);
+            if (accountManager == null) return NotFound();
             var accountManagerDTO = new AccountManagerDTO(accountManager);
             return Ok(accountManagerDTO);
         }
 
-        public IActionResult Post(AccountManager accountManager)
+        [HttpPost]
+        public IActionResult Post([FromBody] AccountManager accountManager)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var createdAccountManager = _accountManagerService.Create(accountManager);
             if (createdAccountManager == null) return BadRequest();
             var createdAccountMangerDTO = new AccountManagerDTO(createdAccountManager);
             return Ok(createdAccountMangerDTO);
         }
 
-        public IActionResult Put(AccountManager accountManager)
+        [HttpPut]
+        public IActionResult Put([FromBody] AccountManager accountManager)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var updatedAccountManager = _accountManagerService.Update(accountManager);
             if (updatedAccountManager == null) return NotFound();
             var updatedAccountManagerDTO = new AccountManagerDTO(updatedAccountManager);
             return Ok(updatedAccountManagerDTO);
         }
 
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _accountManagerService.Delete(id);
+            return Ok();
+        }
+        
+        [HttpOptions]
+        public IActionResult Options()
+        {
             return Ok();
         }
     }

@@ -21,7 +21,7 @@ namespace RockstarResume.App.Controllers
             _rockstarService = rockstarService;
         }
 
-        [Route("{resumeId}")]
+        [HttpGet("{resumeId}")]
         public IActionResult Get(int resumeId)
         {
             var resume = _resumeService.Get().Where(r => r.Id == resumeId).Include(r => r.Rockstar).FirstOrDefault();
@@ -30,6 +30,12 @@ namespace RockstarResume.App.Controllers
             return File(documentStream,
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 "Resume.docx");
+        }
+
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            return Ok();
         }
     }
 }
