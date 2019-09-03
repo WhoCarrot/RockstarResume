@@ -3,14 +3,17 @@ import Language from "@/assets/ts/class/language";
 import Education from "@/assets/ts/class/education";
 import DualInputValue from "@/assets/ts/class/inputvalue/dualInputValue";
 import Experience from "@/assets/ts/class/experience";
+
 import Skills from "@/assets/ts/class/skill";
 import SkillsProgrammingLanguages from "@/assets/ts/data/skills.programminglanguages";
 import SkillsProgrammingTools from "@/assets/ts/data/skills.programmingtools";
-import SkillsDatabases from '@/assets/ts/data/skills.databases';
-import SkillsOperatingsystems from '@/assets/ts/data/skills.operatingsystems';
+import SkillsDatabases from "@/assets/ts/data/skills.databases";
+import SkillsOperatingsystems from "@/assets/ts/data/skills.operatingsystems";
 
 // initial state
-const state = {};
+const state = {
+  setupResumeHasRun: false
+};
 
 // getters
 const getters = {
@@ -42,13 +45,10 @@ const getters = {
 // actions
 const actions = {
   setupResumeData(state: any) {
-    state.commit("setupResumeData");
-  },
-  requestResumeList(state: any, commit: any) {
-    //TODO temporary data population
-    // TODO Call to API to return the stored Resumes
-    state.commit("createResume", 999);
-    state.commit("createResume", 4444);
+    // Only run once
+    if (!state.setupResumeHasRun) {
+      state.commit("setupResumeData");
+    }
   },
   addLanguage(state: any, payload: any) {
     state.commit("addLanguage", payload.resume_id);
@@ -71,6 +71,8 @@ const actions = {
 // mutations
 const mutations = {
   setupResumeData(state: any) {
+    state.setupResumeHasRun = true;
+
     // Insert all default skills
     Skills.insertOrUpdate({
       data: SkillsProgrammingLanguages
@@ -87,10 +89,6 @@ const mutations = {
     Skills.insertOrUpdate({
       data: SkillsOperatingsystems
     });
-  },
-
-  setResumeList(state: any, resumeList: Resume[]) {
-    state.resumeList = resumeList;
   },
 
   createResume(state: any, resume_id: number) {
@@ -156,11 +154,13 @@ const mutations = {
               experience_id: exp_id,
               resume_id
             },
-            work_activities: [{
-              id: random_id(),
-              experience_id: exp_id,
-              resume_id
-            }]
+            work_activities: [
+              {
+                id: random_id(),
+                experience_id: exp_id,
+                resume_id
+              }
+            ]
           }
         ],
         // Extra
@@ -215,11 +215,13 @@ const mutations = {
           experience_id: exp_id,
           resume_id
         },
-        work_activities: [{
-          id: random_id(),
-          experience_id: exp_id,
-          resume_id
-        }]
+        work_activities: [
+          {
+            id: random_id(),
+            experience_id: exp_id,
+            resume_id
+          }
+        ]
       }
     });
   },
