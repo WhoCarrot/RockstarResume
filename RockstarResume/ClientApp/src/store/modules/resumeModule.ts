@@ -3,6 +3,11 @@ import Language from "@/assets/ts/class/language";
 import Education from "@/assets/ts/class/education";
 import DualInputValue from "@/assets/ts/class/inputvalue/dualInputValue";
 import Experience from "@/assets/ts/class/experience";
+import Skills from "@/assets/ts/class/skill";
+import SkillsProgrammingLanguages from "@/assets/ts/data/skills.programminglanguages";
+import SkillsProgrammingTools from "@/assets/ts/data/skills.programmingtools";
+import SkillsDatabases from '@/assets/ts/data/skills.databases';
+import SkillsOperatingsystems from '@/assets/ts/data/skills.operatingsystems';
 
 // initial state
 const state = {};
@@ -36,6 +41,9 @@ const getters = {
 
 // actions
 const actions = {
+  setupResumeData(state: any) {
+    state.commit("setupResumeData");
+  },
   requestResumeList(state: any, commit: any) {
     //TODO temporary data population
     // TODO Call to API to return the stored Resumes
@@ -62,6 +70,25 @@ const actions = {
 
 // mutations
 const mutations = {
+  setupResumeData(state: any) {
+    // Insert all default skills
+    Skills.insertOrUpdate({
+      data: SkillsProgrammingLanguages
+    });
+
+    Skills.insertOrUpdate({
+      data: SkillsProgrammingTools
+    });
+
+    Skills.insertOrUpdate({
+      data: SkillsDatabases
+    });
+
+    Skills.insertOrUpdate({
+      data: SkillsOperatingsystems
+    });
+  },
+
   setResumeList(state: any, resumeList: Resume[]) {
     state.resumeList = resumeList;
   },
@@ -72,6 +99,8 @@ const mutations = {
       data: {
         id: resume_id,
         // Introduction page
+        resume_title: "Test Resume with ID: " + resume_id,
+
         qualities: [
           {
             resume_id,
@@ -118,7 +147,20 @@ const mutations = {
               id: random_id(),
               experience_id: exp_id,
               resume_id
-            }
+            },
+            programming_languages_ids: [5, 90, 45],
+            programming_frameworks_ids: [],
+            programming_operating_systems_ids: [],
+            work_description: {
+              id: random_id(),
+              experience_id: exp_id,
+              resume_id
+            },
+            work_activities: [{
+              id: random_id(),
+              experience_id: exp_id,
+              resume_id
+            }]
           }
         ],
         // Extra
@@ -164,7 +206,20 @@ const mutations = {
           id: random_id(),
           experience_id: exp_id,
           resume_id
-        }
+        },
+        programming_languages_ids: [],
+        programming_frameworks_ids: [],
+        programming_operating_systems: [],
+        work_description: {
+          id: random_id(),
+          experience_id: exp_id,
+          resume_id
+        },
+        work_activities: [{
+          id: random_id(),
+          experience_id: exp_id,
+          resume_id
+        }]
       }
     });
   },

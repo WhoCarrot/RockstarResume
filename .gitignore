@@ -372,3 +372,9 @@ RockstarResume.Services/obj/
 package-lock.json
 
 .vscode/
+
+RockstarResume.DAL/bin/
+
+RockstarResume.Model/bin/
+
+RockstarResume.Services/bin/

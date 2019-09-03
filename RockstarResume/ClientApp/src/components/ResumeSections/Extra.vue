@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import VueInputTable from "@/components/VueInputTable.vue";
 import Certificate from "@/assets/ts/class/inputvalue/certificate"
 import Competency from "@/assets/ts/class/inputvalue/competency"
 import Study from "@/assets/ts/class/inputvalue/study"
@@ -48,9 +47,6 @@ export default {
     Id: {
       type: Number
     },
-  },
-  components: {
-    VueInputTable,
   },
   computed: {
     certificateValue: function () {

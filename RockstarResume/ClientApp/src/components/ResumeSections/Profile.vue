@@ -1,5 +1,14 @@
 <template>
   <b-container class="profile">
+    <!-- Resume title -->
+    <b-row class="my-1">
+      <b-col sm="3">
+        <label for="type-text">Resume title</label>
+      </b-col>
+      <b-col sm="9">
+        <b-form-input id="input-first-name" v-model="resume_title" type="text" required></b-form-input>
+      </b-col>
+    </b-row>
     <!-- Profile Section  -->
     <b-row>
       <b-col>
@@ -295,6 +304,17 @@ export default {
   computed: {
     resumeData: function () {
       return get("resume/resumeData", this.Id);
+    },
+    resume_title: {
+      get() {
+        return Resume.find(this.Id).resume_title;
+      },
+      set(value) {
+        Resume.update({
+          where: this.Id,
+          data: { resume_title: value }
+        });
+      }
     },
     firstName: {
       get() {

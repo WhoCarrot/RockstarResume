@@ -8,10 +8,10 @@ import Quality from "./inputvalue/quality";
 import IntroQuestion2 from "./inputvalue/introQuestion2";
 import IntroQuestion1 from "./inputvalue/introQuestion1";
 import IntroQuestion3 from "./inputvalue/introQuestion3";
-import Certificate from './inputvalue/certificate';
-import Competency from './inputvalue/competency';
-import Study from './inputvalue/study';
-import Interests from './inputvalue/interests';
+import Certificate from "./inputvalue/certificate";
+import Competency from "./inputvalue/competency";
+import Study from "./inputvalue/study";
+import Interests from "./inputvalue/interests";
 
 "use strict";
 
@@ -21,8 +21,10 @@ export default class Resume extends Model {
 
   static fields() {
     return {
-      // Profile
       id: this.attr(null),
+      resume_title: this.attr(""),
+
+      // Profile
       firstName: this.attr(""),
       lastName: this.attr(""),
       region: this.attr(""),
@@ -44,7 +46,7 @@ export default class Resume extends Model {
       certificates: this.hasMany(Certificate, "resume_id"),
       competenties: this.hasMany(Competency, "resume_id"),
       studies: this.hasMany(Study, "resume_id"),
-      interests: this.hasMany(Interests, "resume_id"),
+      interests: this.hasMany(Interests, "resume_id")
     };
   }
 }

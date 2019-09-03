@@ -41,7 +41,6 @@
 
 <script>
 import DualInputValue from "@/assets/ts/class/inputvalue/dualInputValue";
-import VueInputTable from "@/components/VueInputTable.vue";
 import Quality from "@/assets/ts/class/inputvalue/quality"
 import IntroQuestion1 from "@/assets/ts/class/inputvalue/introQuestion1"
 import IntroQuestion2 from "@/assets/ts/class/inputvalue/introQuestion2"
@@ -52,9 +51,6 @@ export default {
   data() {
     return {
     };
-  },
-  components: {
-    VueInputTable,
   },
   props: {
     Id: {

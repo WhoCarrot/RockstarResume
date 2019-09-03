@@ -4,7 +4,7 @@
       <p>{{Id}}</p>
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Profile">
+          <b-tab title="Profile" active>
             <Profile :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Introduction">
@@ -13,11 +13,11 @@
           <b-tab title="Skills">
             <skills :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Experience" active>
-            <experience :Id="Number(Id)"/>
+          <b-tab title="Experience">
+            <experience :Id="Number(Id)" />
           </b-tab>
-          <b-tab title="Extra" >
-            <!-- <extra :Id="Number(Id)" /> -->
+          <b-tab title="Extra">
+            <extra :Id="Number(Id)" />
           </b-tab>
           <b-tab title="Data">
             <b-card-text>
