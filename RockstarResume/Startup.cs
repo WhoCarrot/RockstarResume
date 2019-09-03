@@ -68,15 +68,15 @@ namespace RockstarResume.App
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            //app.UseSpa(spa =>
-            //{
-            //    spa.Options.SourcePath = "ClientApp";
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
 
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseVueCli("serve");
-            //    }
-            //});
+                if (env.IsDevelopment())
+                {
+                    spa.UseVueCli("serve");
+                }
+            });
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System.IO;
-using System.Linq;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Net.Http.Headers;
 using RockstarResume.Logic.Services;
 using RockstarResume.Services;
 
@@ -29,23 +24,6 @@ namespace RockstarResume.App.Controllers
         [Route("{resumeId}")]
         public IActionResult Get(int resumeId)
         {
-            //MemoryStream ms;
-
-            //using (ms = new MemoryStream())
-            //{
-            //    using (WordprocessingDocument wordDocument = WordprocessingDocument.Create(ms, WordprocessingDocumentType.Document))
-            //    {
-            //        MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
-
-            //        mainPart.Document = new Document(
-            //            new Body(
-            //                new Paragraph(
-            //                    new Run(
-            //                        new Text("Hello world!")))));
-            //    }
-            //}
-
-            //return File(ms.ToArray(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Test.docx");
             var resume = _resumeService.Get().Where(r => r.Id == resumeId).Include(r => r.Rockstar).FirstOrDefault();
             if (resume == null) return NotFound();
             var documentStream = _exportService.ExportDocx(resume);
