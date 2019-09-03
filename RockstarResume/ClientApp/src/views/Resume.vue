@@ -33,9 +33,10 @@ import Introduction from "@/components/ResumeSections/Introduction.vue";
 import Skills from "@/components/ResumeSections/Skills.vue";
 import Extra from "@/components/ResumeSections/Extra.vue";
 import Experience from "@/components/ResumeSections/Experience.vue";
-
 import Resume from "@/assets/ts/class/resume";
+
 import { get, sync } from "vuex-pathify";
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -49,7 +50,6 @@ export default {
   },
   data() {
     return {
-      //Id: this.$route.params.Id
     };
   },
   props: ["Id"],
@@ -59,7 +59,32 @@ export default {
     }
   },
   methods: {
-    ...mapActions("resume", ["requestResumeList", "createResume"])
+    ...mapActions("resume", ["requestResumeList", "createResume"]),
+     exportToDocx() {
+      console.log(this.$store.getters["resume/resumeData"](this.Id));
+
+      const { firstName, lastName } = this.$store.getters["resume/resumeData"](this.Id);
+      const resumes = [
+        { id: 1 }
+      ];
+      const id = 4;
+
+      axios.get(`https://localhost:44398/api/rockstar/4`)
+        .then((response) => {
+          axios.put("https://localhost:44398/api/rockstar", { id, firstName, lastName, resumes })
+            .then((response) => {
+              console.log(response);
+              window.open("https://localhost:44398/api/export/1");
+            });
+        }).catch((error, response) => {
+          console.log(error);
+          axios.post("https://localhost:44398/api/rockstar", { id, firstName, lastName, resumes })
+            .then((response) => {
+              console.log(response);
+              window.open("https://localhost:44398/api/export/1");
+            });
+        });
+    }
   },
 };
 </script>
