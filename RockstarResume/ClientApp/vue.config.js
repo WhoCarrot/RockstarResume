@@ -1,5 +1,5 @@
-module.exports = {
-  assetsDir: 'assets',
+ module.exports = {
+     assetsDir: 'assets',
 
   css: {
     loaderOptions: {

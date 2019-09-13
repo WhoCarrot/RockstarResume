@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using Newtonsoft.Json;
 using RockstarResume.Model;
 
 namespace RockstarResume.Logic.Services
@@ -22,29 +19,20 @@ namespace RockstarResume.Logic.Services
             var memoryStream = new MemoryStream();
             using (var document = WordprocessingDocument.Create(memoryStream, WordprocessingDocumentType.Document, true))
             {
-                //var mainPart = document.AddMainDocumentPart();
-
-                //mainPart.Document = new Document();
-                //var body = mainPart.Document.AppendChild(new Body());
-                //var para = body.AppendChild(new Paragraph());
-                //var run = para.AppendChild(new Run());
-                //run.AppendChild(new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!"));
-
-
                 var mainPart = document.AddMainDocumentPart();
+
+                var run = new Run();
+                run.AppendChild(
+                    new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!"));
+                run.AppendChild(new Break());
+                run.AppendChild(new Break());
+                run.AppendChild(
+                    new Text($"{JsonConvert.SerializeObject(resume.Rockstar.Nationality, Formatting.Indented)}"));
 
                 mainPart.Document = new Document(
                     new Body(
                         new Paragraph(
-                            new Run(
-                                new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!")))));
-                //    }
-                //mainPart.Document = new Document();
-                //var documentBody = new Body();
-
-                //var paragraph = documentBody.AppendChild(new Paragraph());
-                //var run = paragraph.AppendChild(new Run());
-                //run.AppendChild(new Text($"Dit is een demo CV van {resume.Rockstar.FirstName} {resume.Rockstar.LastName}!"));
+                            run)));
             }
 
             memoryStream.Seek(0, SeekOrigin.Begin);

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RockstarResume.Logic.Services;
@@ -26,7 +28,7 @@ namespace RockstarResume.App.Controllers
         {
             var resume = _resumeService.Get().Where(r => r.Id == resumeId).Include(r => r.Rockstar).FirstOrDefault();
             if (resume == null) return NotFound();
-            var documentStream = _exportService.ExportDocx(resume);
+            var documentStream = _exportService.ExportDocx(resume);  
             return File(documentStream,
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 "Resume.docx");

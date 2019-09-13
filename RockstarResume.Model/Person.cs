@@ -1,7 +1,4 @@
-﻿using System;
-using RockstarResume.Model.Types;
-
-namespace RockstarResume.Model
+﻿namespace RockstarResume.Model
 {
     public abstract class Person : BaseEntity
     {

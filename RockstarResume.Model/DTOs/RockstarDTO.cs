@@ -1,5 +1,4 @@
 ﻿using System;
-using RockstarResume.Model.Types;
 
 namespace RockstarResume.Model.DTOs
 {

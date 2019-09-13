@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using RockstarResume.Model.RockstarProperties;
-using RockstarResume.Model.Types;
+﻿using RockstarResume.Model.Types;
 
 namespace RockstarResume.Model
 {
